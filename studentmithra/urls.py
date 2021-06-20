@@ -16,8 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
+from accounts.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/users/', include("accounts.api.urls")),
+    url(r'^api/users/', include(("accounts.api.urls",'userapi'),namespace='userapi')),
+    path('login/',login_view,name='login'),
+    path('logout/',logout_view,name='logout'),
+    path('register/',register_view,name='register'),
+    url(r'^api/posts/', include(("posts.api.urls",'posts-api'), namespace='posts-api')),
+    url(r'^posts/', include(("posts.urls",'posts'),namespace='posts')),
+    url(r'^api/comments/', include(("comments.api.urls",'comments-api'), namespace='comments-api')),
+    url(r'^comments/', include(("comments.urls",'comments'), namespace='comments')),
+    url(r'^api/notes/', include(("notes.api.urls",'posts-api'), namespace='notes-api')),
+    # url(r'^notes/',include(("notes.urls",'notes'),namespace='notes')),
 ]

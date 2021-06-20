@@ -17,7 +17,7 @@ from rest_framework.generics import (
     ListAPIView,
     UpdateAPIView,
     RetrieveAPIView,
-    RetrieveUpdateAPIView
+    RetrieveUpdateDestroyAPIView
 )
 from rest_framework.permissions import (
     AllowAny,
@@ -35,8 +35,17 @@ User = get_user_model()
 from .serializers import (
     UserCreateSerializer,
     UserLoginSerializer,
+    UserDetailSerializer,
 )
+class UserListAPIView(ListAPIView):
+    serializer_class = UserDetailSerializer
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
 
+class UserDetailAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = UserDetailSerializer
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
 
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer

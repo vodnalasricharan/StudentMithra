@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
-
+from rest_framework import serializers
+from django.contrib.auth.password_validation import validate_password
 from rest_framework.serializers import (
     CharField,
     EmailField,
@@ -13,10 +14,12 @@ from rest_framework.serializers import (
 User = get_user_model()
 
 
+
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = [
+            'id',
             'username',
             'email',
             'first_name',
@@ -27,7 +30,8 @@ class UserDetailSerializer(ModelSerializer):
 class UserCreateSerializer(ModelSerializer):
     email = EmailField(label='Email Address')
     email2 = EmailField(label='Confirm Email')
-
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
     class Meta:
         model = User
         fields = [
@@ -35,6 +39,7 @@ class UserCreateSerializer(ModelSerializer):
             'email',
             'email2',
             'password',
+            'password2',
 
         ]
         extra_kwargs = {"password":
@@ -68,6 +73,11 @@ class UserCreateSerializer(ModelSerializer):
         if email1 != email2:
             raise ValidationError("Emails must match.")
         return value
+    def validate_password2(self,attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Password fields didn't match."})
+
+        return attrs
 
     def create(self, validated_data):
         username = validated_data['username']
