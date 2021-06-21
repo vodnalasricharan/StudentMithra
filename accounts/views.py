@@ -6,6 +6,7 @@ from django.contrib.auth import (
     logout,
 
     )
+import random
 from .forms import *
 from django.contrib import messages
 from .models import *
@@ -26,6 +27,9 @@ from .models import *
 #                 user=user,
 #                 name= request.POST.get('username'),
 #                 email = request.POST.get('email'),
+#                 slug1=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
+#                 slug2=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
+#                 slug3=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
 #             )
 #
 #             messages.success(request, 'Account was created for ' + username)

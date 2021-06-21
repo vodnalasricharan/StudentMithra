@@ -21,6 +21,23 @@ class Account(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     # profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
     mobile_no= PhoneField(blank=True, help_text='Contact phone number')
+    slug1=models.CharField(max_length=20,null=True,unique=True)
+    slug2 = models.CharField(max_length=20, null=True,unique=True)
+    slug3 = models.CharField(max_length=20, null=True,unique=True)
 
     def __str__(self):
         return self.email
+
+class Resume(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    slug=models.CharField(max_length=20,null=False,unique=True)
+    resume=models.FileField(upload_to='pdfs')
+
+    def __str__(self):
+        return self.slug
+
+class codinglinks(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    link=models.URLField(max_length=500,null=False)
+    def __str__(self):
+        return self.link
