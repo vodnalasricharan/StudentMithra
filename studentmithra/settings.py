@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #local apps
     'rest_framework',
     'accounts',
+    'dashboard',
     'comments',
     'notes',
     'posts',
