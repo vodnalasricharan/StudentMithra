@@ -1,6 +1,6 @@
 {% load static%}
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
 <html>
 
 <head>
@@ -37,19 +37,22 @@
                             <div class="text-center">
                                 <h1 class="text-dark mb-4" style="margin-top: 0px;color: rgb(77,168,218);">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" method="POST">
+                                {% csrf_token %}
+                                <div class="mb-3" class="form-group"><input class="form-control form-control-user" type="name" id="exampleInputName" placeholder="Username" name="username"></div>
+                                <div class="mb-3" class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
                                 <div class="row mb-3">
-                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name" name="first_name"></div>
-                                    <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Last Name" name="last_name"></div>
-                                </div>
-                                <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password"></div>
-                                    <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat"></div>
-                                </div><button class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(18,35,46);">Register Account</button>
-                                <hr><a class="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button" style="color: #eefbfb;"><i class="fab fa-google"></i>&nbsp; Register with Google</a>
-                                <hr>
+                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password1"></div>
+                                    <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password2"></div>
+                                </div><div class="form-group"><button class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(18,35,46);">Register Account</button></div>
+
+
                             </form>
+                            {% for message in messages %}
+                                    <div class="alert alert-primary" role="alert">
+					                        <p id="messages">{{message}}</p>
+                                    </div>
+                                    {% endfor %}
                             <div class="text-center"><a class="small" href="forgot-password.html" style="border-color: rgb(78, 115, 223);border-top-color: rgb(78,;border-right-color: 115,;border-bottom-color: 223);border-left-color: 115,;color: rgb(18,35,46);">Forgot Password?</a></div>
                             <div class="text-center"><a class="small" href="{% url 'login' %}" style="color: rgb(18,35,46);">Already have an account? Login!</a></div>
                         </div>

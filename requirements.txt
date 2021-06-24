@@ -6,6 +6,7 @@ cryptography==3.4.7
 defusedxml==0.7.1
 Django @ file:///tmp/build/80754af9/django_1622711766781/work
 django-allauth==0.44.0
+django-ckeditor==6.1.0
 django-crispy-forms==1.12.0
 django-filter==2.4.0
 django-markdown-deux==1.0.5

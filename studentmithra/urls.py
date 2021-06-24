@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
 from accounts.views import *
+from dashboard.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('',homepage,name='home'),
-    path('profile/',profile_view,name='profile'),
-
+    # path('profile/',profile_view,name='profile'),
+    path('dashboard/',dashboard,name='dashboard'),
     url(r'^api/users/', include(("accounts.api.urls",'userapi'),namespace='userapi')),
     path('login/',accountlogin,name='login'),
     path('logout/',logout_view,name='logout'),

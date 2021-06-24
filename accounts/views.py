@@ -11,21 +11,12 @@ from .forms import *
 from django.contrib import messages
 from .models import *
 # Create your views here.
-
+from dashboard.views import *
 def homepage(request):
     account = Account.objects.all()
 
     context = {'accounts':account,}
     return render(request,'dashboard.html',context)
-
-
-def profile_view(request):
-
-
-    context={}
-    return render(request,'profile.html',context)
-
-
 
 
 def accountregister(request):
@@ -38,7 +29,7 @@ def accountregister(request):
             form.password1 = request.POST.get('password1')
             form.password2 = request.POST.get('password2')
             user = form.save()
-            username = form.cleaned_data.get('username')
+            username = request.POST.get('username')
 
             Account.objects.create(
                 user=user,
@@ -59,14 +50,14 @@ def accountregister(request):
 
 def accountlogin(request):
     if request.method == 'POST':
-        username = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('dashboard')
 
         else:
             messages.info(request, 'Username/Password is INCORRECT ')
@@ -75,9 +66,12 @@ def accountlogin(request):
     return render(request, 'login.html', context)
 
 
+def logout_view(request):
+    logout(request)
+    return redirect("login")
 
 
-def login_view(request):
+"""def login_view(request):
     # print(request.user.is_authenticated())
     next = request.GET.get('next')
     title = "Login"
@@ -118,8 +112,5 @@ def register_view(request):
         "title": title
     }
     return render(request, "form.html", context)
+"""
 
-
-def logout_view(request):
-    logout(request)
-    return redirect("login")

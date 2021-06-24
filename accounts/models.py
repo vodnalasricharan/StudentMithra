@@ -19,16 +19,16 @@ class Account(models.Model):
         ('female', 'female'),
     )
     user= models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200,null=True)
     # we set null=True just for any other exception errors..but this name field cannot be empty
     email = models.CharField(max_length=200, null=True, validators=[validate_email])
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
-    gender = models.CharField(choices=GEN,max_length=10,null=True)
+    date_created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
+    gender = models.CharField(choices=GEN,max_length=10,blank=True,null=True)
     # profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
     mobile_no= PhoneField(blank=True, help_text='Contact phone number')
-    slug1 = models.CharField(max_length=20,null=True,unique=True)
-    slug2 = models.CharField(max_length=20, null=True,unique=True)
-    slug3 = models.CharField(max_length=20, null=True,unique=True)
+    slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
+    slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
+    slug3 = models.CharField(max_length=20, blank=True,unique=True,null=True)
 
     def __str__(self):
         return self.email
@@ -56,7 +56,7 @@ class Internship(models.Model):
 class Project(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     title=models.CharField(max_length=100,null=False)
-    link=models.URLField(max_length=500,null=True)
+    link=models.URLField(max_length=500,null=True,blank=True)
     discription=models.CharField(max_length=1000,null=False)
 
 class Addon(models.Model):
