@@ -1,16 +1,17 @@
-{% extends "base.html" %}
+{% extends 'dashboard-base.html' %}
+{% load static %}
 {% load urlify %}
 {% load crispy_forms_tags %}
 
 
-{% block head_title %}
-{{ instance.title }} | {{ block.super }}
-{% endblock head_title %}
+<!--{% block head_title %}-->
+<!--{{ instance.title }} | {{ block.super }}-->
+<!--{% endblock head_title %}-->
 
 
- {% block post_detail_link %}
-  <li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>
-  {% endblock %}
+<!-- {% block post_detail_link %}-->
+<!--  <li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>-->
+<!--  {% endblock %}-->
 
 
 
