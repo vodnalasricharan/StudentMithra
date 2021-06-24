@@ -23,7 +23,7 @@ class Account(models.Model):
     # we set null=True just for any other exception errors..but this name field cannot be empty
     email = models.CharField(max_length=200, null=True, validators=[validate_email])
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    gender=models.CharField(choices=GEN,max_length=10,null=True)
+    gender = models.CharField(choices=GEN,max_length=10,null=True)
     # profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
     mobile_no= PhoneField(blank=True, help_text='Contact phone number')
     slug1 = models.CharField(max_length=20,null=True,unique=True)
