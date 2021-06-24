@@ -1,20 +1,20 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 {% load urlify %}
 {% load crispy_forms_tags %}
 
 
-{% block head_title %}
-{{ instance.title }} | {{ block.super }}
-{% endblock head_title %}
+<!--{% block head_title %}-->
+<!--{{ instance.title }} | {{ block.super }}-->
+<!--{% endblock head_title %}-->
 
 
- {% block post_detail_link %}
-  <li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>
-  {% endblock %}
+<!-- {% block post_detail_link %}-->
+<!--  <li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>-->
+<!--  {% endblock %}-->
 
 
 
-{% block content %}
+{% block part %}<div class="container">
 <div class='col-sm-6 col-sm-offset-3'>
     {% if instance.image %}
     <img src='{{ instance.image.url }}' class='img-responsive' />
@@ -112,5 +112,5 @@ Linkedin
 </div>
 </div>
 
-
-{% endblock content %}
+</div>
+{% endblock part %}

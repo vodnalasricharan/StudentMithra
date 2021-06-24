@@ -30,7 +30,7 @@ urlpatterns = [
     path('logout/',logout_view,name='logout'),
     path('register/',accountregister,name='register'),
     url(r'^api/posts/', include(("posts.api.urls",'posts-api'), namespace='posts-api')),
-    url(r'^posts/', include(("posts.urls",'posts'),namespace='posts')),
+    path('posts/',include('posts.urls')),
     url(r'^api/comments/', include(("comments.api.urls",'comments-api'), namespace='comments-api')),
     url(r'^comments/', include(("comments.urls",'comments'), namespace='comments')),
     url(r'^api/notes/', include(("notes.api.urls",'posts-api'), namespace='notes-api')),
