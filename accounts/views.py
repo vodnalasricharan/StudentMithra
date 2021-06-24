@@ -11,56 +11,70 @@ from .forms import *
 from django.contrib import messages
 from .models import *
 # Create your views here.
-# def accountregister(request):
-#     form = CreateUserForm()
-#     if request.method == 'POST':
-#         form = CreateUserForm(request.POST)
-#         if form.is_valid():
-#             form.username = request.POST.get('username')
-#             form.email = request.POST.get('email')
-#             form.password1 = request.POST.get('password1')
-#             form.password2 = request.POST.get('password2')
-#             user = form.save()
-#             username = form.cleaned_data.get('username')
-#
-#             Account.objects.create(
-#                 user=user,
-#                 name= request.POST.get('username'),
-#                 email = request.POST.get('email'),
-#                 slug1=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-#                 slug2=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-#                 slug3=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-#             )
-#
-#             messages.success(request, 'Account was created for ' + username)
-#
-#             return redirect('studentregister')
-#
-#     context = {'form': form}
-#     return render(request, 'Registration.html', context)
 
-#
-# def accountlogin(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#
-#         password = request.POST.get('password')
-#
-#         user = authenticate(request, username=username, password=password)
-#
-#         if user is not None:
-#             login(request, user)
-#             return redirect('dashboard')
-#
-#         else:
-#             messages.info(request, 'Username OR password is incorrect')
-#
-#     context = {}
-#     return render(request, 'AccountLogin.html', context)
-#
-# def logout_view(request):
-#     logout(request)
-#     return redirect("/")
+def homepage(request):
+    account = Account.objects.all()
+
+    context = {'accounts':account,}
+    return render(request,'dashboard.html',context)
+
+
+def profile_view(request):
+
+
+    context={}
+    return render(request,'profile.html',context)
+
+
+
+
+def accountregister(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.username = request.POST.get('username')
+            form.email = request.POST.get('email')
+            form.password1 = request.POST.get('password1')
+            form.password2 = request.POST.get('password2')
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            Account.objects.create(
+                user=user,
+                name= request.POST.get('username'),
+                email = request.POST.get('email'),
+                slug1=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
+                slug2=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
+                slug3=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
+            )
+
+            messages.success(request, 'Account was created for ' + username)
+
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, 'register.html', context)
+
+
+def accountlogin(request):
+    if request.method == 'POST':
+        username = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+
+        else:
+            messages.info(request, 'Username/Password is INCORRECT ')
+
+    context = {}
+    return render(request, 'login.html', context)
+
+
 
 
 def login_view(request):
@@ -97,7 +111,7 @@ def register_view(request):
         login(request, new_user)
         if next:
             return redirect(next)
-        return redirect("/")
+        return redirect("home")
 
     context = {
         "form": form,
@@ -108,4 +122,4 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/")
+    return redirect("login")
