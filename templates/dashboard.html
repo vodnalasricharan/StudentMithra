@@ -2,6 +2,10 @@
 
 {%load static%}
 
+
+{% block head_title %}
+{{ request.user }} | {{ block.super }}
+{% endblock head_title %}
 {% block part %}
 
                 <div class="container-fluid" style="background: #4da8da;">
