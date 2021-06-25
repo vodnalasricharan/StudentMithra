@@ -3,9 +3,9 @@
 {% load crispy_forms_tags %}
 
 
-<!--{% block head_title %}-->
-<!--{{ instance.title }} | {{ block.super }}-->
-<!--{% endblock head_title %}-->
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
 
 
 <!-- {% block post_detail_link %}-->
@@ -59,7 +59,7 @@ Linkedin
 <div class='row'>
 <div class='col-sm-12 '>
 
-   <div class='post-detail-item'>{{ instance.get_markdown }}</div>
+   <div class='post-detail-item'>{{ instance.content|safe }}</div>
 
     <hr/>
     <br/>

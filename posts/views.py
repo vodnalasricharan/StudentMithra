@@ -131,10 +131,12 @@ def post_create(request):
 
 @login_required
 def post_update(request, slug=None):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
+	# if not request.user.is_staff or not request.user.is_superuser:
+	# 	raise Http404
 	instance = get_object_or_404(Post, slug=slug)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
+	if request.user != instance.user:
+		raise Http404
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
@@ -151,9 +153,11 @@ def post_update(request, slug=None):
 
 @login_required
 def post_delete(request, slug=None):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
+	# if not request.user.is_staff or not request.user.is_superuser:
+	# 	raise Http404
 	instance = get_object_or_404(Post, slug=slug)
+	if request.user != instance.user:
+		raise Http404
 	instance.delete()
 	messages.success(request, "Successfully deleted")
-	return redirect("posts:list")
+	return redirect("posts")

@@ -29,6 +29,8 @@ class Account(models.Model):
     slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
     slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
     slug3 = models.CharField(max_length=20, blank=True,unique=True,null=True)
+    address=models.CharField(max_length=200,blank=True,null=True)
+    linkedin_profile=models.URLField(max_length=500,blank=True,null=True)
 
     def __str__(self):
         return self.email
@@ -42,8 +44,20 @@ class Resume(models.Model):
         return self.slug
 
 class codinglinks(models.Model):
+    PLT=(
+        ('Leetcode','leetcode'),
+        ('Hackerrank','hackerrank'),
+        ('codechef','codechef'),
+        ('codeforces','codeforces'),
+        ('Topcoder','topcoder'),
+        ('codewar','codewar'),
+        ('coderbyte','coderbyte'),
+        ('other','other'),
+    )
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    link=models.URLField(max_length=500,null=False)
+    platform=models.CharField(choices=PLT,max_length=200,default='leetcode')
+    image=models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='codinglinks')
+    link=models.URLField(max_length=500,null=False,blank=True)
     def __str__(self):
         return self.link
 
@@ -62,3 +76,17 @@ class Project(models.Model):
 class Addon(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     discription=models.CharField(max_length=500,null=False)
+
+class Education(models.Model):
+    QUA=(
+        ('Bachelors','Bachelor'),
+        ('Masters','master'),
+        ('Diploma','diploma'),
+        ('Degree','degree'),
+        ('HighSchool','highschool'),
+    )
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    inst_name=models.CharField(max_length=200)
+    yop=models.IntegerField(default=2000)
+    qualif=models.CharField(choices=QUA,max_length=200,default='highschool')
+    branch=models.CharField(max_length=200,blank=True,null=True)
