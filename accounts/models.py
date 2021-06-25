@@ -5,10 +5,14 @@ from phone_field import PhoneField
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 # Create your models here.
-def validate_file(value):
-    value= str(value)
+def validate_file(file):
+    value= str(file.name)
     if value.endswith(".pdf") != True and value.endswith(".doc") != True and value.endswith(".docx") != True:
         raise ValidationError("Only PDF and Word Documents can be uploaded")
+    file_size = file.size
+    limit_mb = 2
+    if file_size > limit_mb * 1024 * 1024:
+        raise ValidationError("Max size of file is %s MB" % limit_mb)
     else:
         return value
 def validate_image(image):
