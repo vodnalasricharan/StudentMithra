@@ -36,9 +36,9 @@ def post_detail(request, slug=None):
 		"object_id": instance.id
 	}
 	form = CommentForm(request.POST or None, initial=initial_data)
-	if form.is_valid() and request.user.is_authenticated():
+	if form.is_valid() and request.user.is_authenticated:
 		c_type = form.cleaned_data.get("content_type")
-		content_type = ContentType.objects.get(model=c_type)
+		content_type,create = ContentType.objects.get_or_create(model=c_type)
 		obj_id = form.cleaned_data.get('object_id')
 		content_data = form.cleaned_data.get("content")
 		parent_obj = None
@@ -59,7 +59,7 @@ def post_detail(request, slug=None):
 			content=content_data,
 			parent=parent_obj,
 		)
-		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+		return HttpResponseRedirect(instance.get_absolute_url())
 
 	comments = instance.comments
 	context = {

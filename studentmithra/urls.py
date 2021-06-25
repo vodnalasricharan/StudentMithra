@@ -18,13 +18,15 @@ from django.urls import path
 from django.conf.urls import url,include
 from accounts.views import *
 from dashboard.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('',homepage,name='home'),
     # path('profile/',profile_view,name='profile'),
-    path('dashboard/',dashboard,name='dashboard'),
+    path('dashboard/',include('dashboard.urls')),
     url(r'^api/users/', include(("accounts.api.urls",'userapi'),namespace='userapi')),
     path('login/',accountlogin,name='login'),
     path('logout/',logout_view,name='logout'),
@@ -36,3 +38,8 @@ urlpatterns = [
     url(r'^api/notes/', include(("notes.api.urls",'posts-api'), namespace='notes-api')),
     # url(r'^notes/',include(("notes.urls",'notes'),namespace='notes')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

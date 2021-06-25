@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import *
 from phone_field import PhoneField
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 def validate_image(image):
     file_size = image.file.size
@@ -38,7 +39,7 @@ class Account(models.Model):
 class Resume(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     slug=models.CharField(max_length=20,null=False,unique=True)
-    resume=models.FileField(upload_to='pdfs')
+    resume=models.FileField(upload_to='pdfs',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 
     def __str__(self):
         return self.slug

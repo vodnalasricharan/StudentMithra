@@ -43,6 +43,9 @@ def accountregister(request):
             messages.success(request, 'Account was created for ' + username)
 
             return redirect('login')
+        else:
+            messages.info(request,'enter correct details/user already exists')
+
 
     context = {'form': form}
     return render(request, 'register.html', context)
