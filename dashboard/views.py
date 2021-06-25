@@ -4,6 +4,16 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 # Create your views here.
 
+
+from django.core.exceptions import ValidationError
+# Create your models here.
+def validate_file(value):
+    value= str(value)
+    if value.endswith(".pdf") != True and value.endswith(".doc") != True and value.endswith(".docx") != True:
+        raise ValidationError("Only PDF and Word Documents can be uploaded")
+    else:
+        return value
+
 from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
@@ -14,6 +24,11 @@ def myresume(request):
     if request.method == 'POST':
         if request.POST.get("form_type") == 'resume1' and request.FILES['resume1']:
             myfile = request.FILES['resume1']
+            try:
+                validate_file(myfile.name)
+            except ValidationError:
+                messages.info(request,'only pdf/doc/docx files allowed')
+                return render(request, 'Resume.html')
             # fs = FileSystemStorage()
             # filename = fs.save(myfile.name, myfile)
             # uploaded_file_url = fs.url(filename)
@@ -29,6 +44,11 @@ def myresume(request):
             return render(request,'Resume.html')
         elif request.POST.get("form_type") == 'resume2' and request.FILES['resume2']:
             myfile = request.FILES['resume2']
+            try:
+                validate_file(myfile.name)
+            except ValidationError:
+                messages.info(request,'only pdf/doc/docx files allowed')
+                return render(request, 'Resume.html')
             # fs = FileSystemStorage()
             # filename = fs.save(myfile.name, myfile)
             # uploaded_file_url = fs.url(filename)
@@ -43,6 +63,11 @@ def myresume(request):
             return render(request,'Resume.html')
         elif request.POST.get("form_type") == 'resume3' and request.FILES['resume3']:
             myfile = request.FILES['resume3']
+            try:
+                validate_file(myfile.name)
+            except ValidationError:
+                messages.info(request,'only pdf/doc/docx files allowed')
+                return render(request, 'Resume.html')
             # fs = FileSystemStorage()
             # filename = fs.save(myfile.name, myfile)
             # uploaded_file_url = fs.url(filename)

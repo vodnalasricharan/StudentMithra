@@ -1,4 +1,7 @@
 {% extends "index.html" %}
+{% block head_title %}
+{{ title }} | {{ block.super }}
+{% endblock head_title %}
 {% block part %}
 {% for message in messages %}
                                     <div class="alert alert-primary" role="alert">

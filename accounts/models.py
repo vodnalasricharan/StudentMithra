@@ -3,7 +3,14 @@ from django.contrib.auth.models import User
 from django.core.validators import *
 from phone_field import PhoneField
 from django.core.validators import FileExtensionValidator
+from django.core.exceptions import ValidationError
 # Create your models here.
+def validate_file(value):
+    value= str(value)
+    if value.endswith(".pdf") != True and value.endswith(".doc") != True and value.endswith(".docx") != True:
+        raise ValidationError("Only PDF and Word Documents can be uploaded")
+    else:
+        return value
 def validate_image(image):
     file_size = image.file.size
     # limit_kb = 150
@@ -39,7 +46,7 @@ class Account(models.Model):
 class Resume(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     slug=models.CharField(max_length=20,null=False,unique=True)
-    resume=models.FileField(upload_to='pdfs',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+    resume=models.FileField(upload_to='pdfs',validators=[validate_file])
 
     def __str__(self):
         return self.slug

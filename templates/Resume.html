@@ -1,5 +1,8 @@
 {% extends 'index.html' %}
 {% load static %}
+{% block head_title %}
+MyResumes | {{ block.super }}
+{% endblock head_title %}
 {% block part %}
 {% for message in messages %}
                                     <div class="alert alert-primary" role="alert">

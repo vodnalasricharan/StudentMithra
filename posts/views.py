@@ -100,7 +100,7 @@ def post_list(request):
 
 	context = {
 		"object_list": queryset,
-		"title": "List",
+		"title": "Posts",
 		"page_request_var": page_request_var,
 		"today": today,
 	}
@@ -122,6 +122,7 @@ def post_create(request):
 		return HttpResponseRedirect(instance.get_absolute_url())
 	context = {
 		"form": form,
+		"title": "Create Post",
 	}
 	return render(request, "post_form.html", context)
 
