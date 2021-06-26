@@ -1,37 +1,48 @@
 {% extends "index.html" %}
-
 {% block head_title %}
  {{ title }} | {{ block.super }}
 {% endblock head_title %}
 {% block part %}
-    <div class="container">
-        <div style="color: black;">
-            <h1>Notes:</h1>
 
-            <div style="padding-left:43.75%;">
-              <a class="btn btn-sm btn-warning" href="{% url 'createnote' %}">Add Note</a>
-            </div>
-                <table border="1" style="width:50%">
-                    <th>
-                        <tr>
-                            <th>Title</th>
-                            <th>Data</th>
-                            <th>update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </th>
-                    <tbody>
-                        {% for note in notes %}
-                            <tr>
-                                <td>{{note.title}}</td>
-                                <td>{{note.data}} </td>
-                                <td><a class="btn btn-sm btn-warning" href="{% url 'updatenote' note.id %}">Update</a></td>
-                                <td><a class="btn btn-sm btn-danger"href="{% url 'deletenote' note.id %}">Delete</a></td>
-                            </tr>
-                        {%endfor%}
-                    </tbody>
-                </table>
-        </div>
 
-    </div>
-{% endblock part %}
+<div class="container">
+    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Notes</h2>
+                    <div class="card shadow" style="border-radius: 15px;margin-bottom: 15px;">
+                        <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                <div>
+                                     <a class="btn btn-sm btn-warning"  style="background-color : #4da8da; border-color :#007cc7 ; box-shadow: 2px 2px 10px 0px rgb(120,168,248);" href="{% url 'createnote' %}">Add Note</a>
+
+                                </div>
+
+
+
+                        </div>
+                        <div class="card-body" style="background: rgba(255,240,0,0.7);margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                            <th style="width: 300px;">Title</th>
+                                            <th>Data</th>
+                                            <th style="width: 50px;">Update</th>
+                                            <th style="width: 76px;text-align: center;">Delete</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for note in notes %}
+                                        <tr>
+                                            <td>{{note.title}}</td>
+                                            <td>{{note.data}} </td>
+                                            <td><a class="btn btn-sm btn-warning" style="background-color : #4e73df;" href="{% url 'updatenote' note.id %}">Update</a></td>
+                                            <td><a class="btn btn-sm btn-danger"href="{% url 'deletenote' note.id %}">Delete</a></td>
+                                        </tr>
+                                        {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock part %}python manage.py runserver

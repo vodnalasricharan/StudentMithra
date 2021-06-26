@@ -23,7 +23,12 @@
                         <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
                             <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
                                 <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
-                                    <p class="m-0 fw-bold" style="color: #ffffff;">Create Post</p>
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Create Post
+                                                                        <button class="btn btn-primary btn-sm" type="submit" style="margin-left : 75%;text-align:right">Update</button><button class="btn btn-primary btn-sm" type="submit" style="background:red">Delete</button>
+
+                                    </p>
+
+
                                 </div>
                                 <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
                                     <div class="container">
@@ -82,7 +87,7 @@ Linkedin
 
     <div>
 
-        <p class='lead'>Comments</p>
+        <p class='lead' style="color:black;"><b>Comments</b></p>
         {% if request.user.is_authenticated %}
         <form method="POST" action="."> {% csrf_token %}
             {{ comment_form|crispy }}
