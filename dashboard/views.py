@@ -3,6 +3,7 @@ from accounts.models import *
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 import os
+from .forms import *
 # Create your views here.
 
 
@@ -94,3 +95,17 @@ def myresume(request):
             return render(request, 'Resume.html')
 
     return render(request,'Resume.html')
+
+@login_required
+def profilesettings(request):
+    instance=Account.objects.get(user=request.user)
+    form=AccountForm(instance=instance)
+    if request.method=='POST':
+        if form.is_valid():
+            form.save()
+    context={
+        'title': 'profilesettings',
+        'form': form,
+        'instance': instance,
+    }
+    return render(request,'profile.html',context=context)
