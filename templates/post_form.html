@@ -11,17 +11,27 @@
 
 
 {% block part %}
-<div class="container">
+<div class="container-fluid" style="background: #4da8da;">
 
-<div class='col-sm-6'>
-<h1>Create new Post</h1>
-<hr/>
+                    <div class="row">
 
-<form method='POST' action=''>{% csrf_token %}
-    {{ form.media.css }}
-    {{  form.media.js }}
-{{ form.as_p }}
-<input type='submit' class='btn btn-default' value='Create Post' />
-</form>
-</div></div>
+                        <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
+                            <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Create Post</p>
+                                </div>
+                                <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                    <form method='POST' action=''>{% csrf_token %}
+                                        {{ form.media.css }}
+                                        {{  form.media.js }}
+                                        {{ form.as_p }}
+                                        <div class="mb-3" style="margin-top: 5px;"><button class="btn btn-primary btn-sm" type="submit">Create Post</button></div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+</div>
 {% endblock part %}
