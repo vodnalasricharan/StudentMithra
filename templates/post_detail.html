@@ -14,7 +14,19 @@
 
 
 
-{% block part %}<div class="container">
+{% block part %}
+
+<div class="container-fluid" style="background: #4da8da;">
+
+                    <div class="row">
+
+                        <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
+                            <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Create Post</p>
+                                </div>
+                                <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                    <div class="container">
 <div class='col-sm-6 col-sm-offset-3'>
     {% if instance.image %}
     <img src='{{ instance.image.url }}' class='img-responsive' />
@@ -56,8 +68,12 @@ Linkedin
 <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
 
 </p> -->
+
+
+
 <div class='row'>
 <div class='col-sm-12 '>
+
 
    <div class='post-detail-item'>{{ instance.content|safe }}</div>
 
@@ -97,4 +113,11 @@ Linkedin
 </div>
 
 </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+</div>
+
 {% endblock part %}
