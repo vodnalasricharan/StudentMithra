@@ -37,7 +37,7 @@ class Account(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
     gender = models.CharField(choices=GEN,max_length=10,blank=True,null=True)
     # profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
-    mobile_no= PhoneField(blank=True, help_text='Contact phone number')
+    mobile_no= PhoneField(blank=True)
     slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
     slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
     slug3 = models.CharField(max_length=20, blank=True,unique=True,null=True)
