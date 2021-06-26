@@ -25,16 +25,15 @@
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/untitled.css' %}">
 </head>
-
-<body class="bg-gradient-primary" style="background: #4da8da;">
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav" style="height: 66px;background: linear-gradient(90deg, #007cc7 67%, #12232e 83%);">
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav" style="height: 66px;background: linear-gradient(90deg, #007cc7 67%, #12232e 83%);">
         <div class="container"><a class="navbar-brand d-lg-flex justify-content-lg-center align-items-lg-center" href="/" style="width: 35.1px;text-align: center;margin-right: 16px;">
                 <div></div><i class="far fa-lightbulb" style="text-align: center;color: rgb(230,249,12);font-size: 25px;"></i>&nbsp;
             </a>
-           <h1 class="text-center" style="font-family: ABeeZee, sans-serif;color: rgb(230,249,12);font-size: 22.5px;margin-top: 2px;" >Blog</h1>
+           <a class="navbar-brand d-lg-flex justify-content-lg-center align-items-lg-center" href="{% url 'posts' %}"><h1 class="text-center" style="font-family: ABeeZee, sans-serif;color: rgb(230,249,12);font-size: 22.5px;margin-top: 2px;">Blog</h1></a>
         </div>
     </nav>
-    <div class="container" style="padding-top: 0px;">
+<body class="bg-gradient-primary" style="background: #4da8da;">
+    <div class="container" style="padding-top: 30px;">
         <div class="row justify-content-center" style="margin-top: 0px;">
             <div class="col-md-9 col-lg-12 col-xl-10" style="padding-top: 0px;padding-bottom: 0px;margin-left: 0px;margin-bottom: 20px;margin-top: 40px;">
                 <div class="card shadow-lg o-hidden border-0 my-5">
@@ -72,7 +71,9 @@
                 </div>
             </div>
         </div>
+
     </div>
+    
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>
     <script src="{% static 'assets/js/markdownit-edit-1.js' %}"></script>
