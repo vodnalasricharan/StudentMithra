@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% block head_title %}
+ {{ title }} | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+    <div class="container">
+
+        <div class='col-sm-6'>
+            <div style="color:black;">
+                <h1>{{ title }}</h1>
+                <hr/>
+
+                <form method='POST' action=''>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">{{ title }}</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock part %}

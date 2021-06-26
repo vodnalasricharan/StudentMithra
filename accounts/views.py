@@ -16,7 +16,7 @@ def homepage(request):
     account = Account.objects.all()
 
     context = {'accounts':account,}
-    return render(request,'dashboard.html',context)
+    return render(request,'homepage.html',context)
 
 
 def accountregister(request):

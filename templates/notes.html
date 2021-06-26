@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block head_title %}
+ {{ title }} | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+    <div class="container">
+        <div style="color: black;">
+            <h1>Notes:</h1>
+
+            <div style="padding-left:43.75%;">
+              <a class="btn btn-sm btn-warning" href="{% url 'createnote' %}">Add Note</a>
+            </div>
+                <table border="1" style="width:50%">
+                    <th>
+                        <tr>
+                            <th>Title</th>
+                            <th>Data</th>
+                            <th>update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </th>
+                    <tbody>
+                        {% for note in notes %}
+                            <tr>
+                                <td>{{note.title}}</td>
+                                <td>{{note.data}} </td>
+                                <td><a class="btn btn-sm btn-warning" href="{% url 'updatenote' note.id %}">Update</a></td>
+                                <td><a class="btn btn-sm btn-danger"href="{% url 'deletenote' note.id %}">Delete</a></td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+        </div>
+
+    </div>
+{% endblock part %}

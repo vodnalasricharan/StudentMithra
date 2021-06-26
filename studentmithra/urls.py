@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^comments/', include(("comments.urls",'comments'), namespace='comments')),
     url(r'^api/notes/', include(("notes.api.urls",'posts-api'), namespace='notes-api')),
     # url(r'^notes/',include(("notes.urls",'notes'),namespace='notes')),
+    path('notes/',include('notes.urls')),
 ]
 
 if settings.DEBUG:
