@@ -3,11 +3,6 @@
 {{ title }} | {{ block.super }}
 {% endblock head_title %}
 {% block part %}
-{% for message in messages %}
-                                    <div class="alert alert-primary" role="alert">
-					                        <p id="messages">{{message}}</p>
-                                    </div>
-{% endfor %}
 
 <div class='col-sm-6 col-sm-offset-3'>
     <h1>{{ title }}</h1>
