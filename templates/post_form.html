@@ -13,14 +13,15 @@
                         <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
                             <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
                                 <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
-                                    <p class="m-0 fw-bold" style="color: #ffffff;">Create Post</p>
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">{{title}}</p>
                                 </div>
                                 <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
                                     <form method='POST' action=''>{% csrf_token %}
                                         {{ form.media.css }}
                                         {{  form.media.js }}
                                         {{ form|crispy }}
-                                        <div class="mb-3" style="margin-top: 5px;"><button class="btn btn-primary btn-sm" type="submit">Create Post</button></div>
+                                        <div class="mb-3" style="margin-top: 5px;"><button class="btn btn-primary btn-sm" type="submit">
+                                            {{title}}</button></div>
 
                                     </form>
                                 </div>

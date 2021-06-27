@@ -22,6 +22,7 @@ from comments.models import Comment
 from .forms import PostForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
 
 def post_detail(request, slug=None):
@@ -100,10 +101,10 @@ def post_list(request):
         queryset = paginator.page(paginator.num_pages)
 
     context = {
-        "object_list": queryset,
-        "title": "Posts",
-        "page_request_var": page_request_var,
-        "today": today,
+            "object_list": queryset,
+            "title": "Posts",
+            "page_request_var": page_request_var,
+            "today": today,
     }
     return render(request, "post_list.html", context)
 
@@ -149,6 +150,7 @@ def post_update(request, slug=None):
         "title": instance.title,
         "instance": instance,
         "form":form,
+        "title": "Update Post",
     }
     return render(request, "post_form.html", context)
 

@@ -7,7 +7,9 @@
 <div class="container">
     <div class="card shadow" style="border-radius: 15px;margin-bottom: 15px;">
         <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
-            <p class="m-0 fw-bold" style="color: #ffffff;">Blog</p>
+            <h1 class="m-0 fw-bold" style="color: #ffffff;">Blog
+                <a class="btn btn-primary btn-bn" role="button" style="position:absolute; top:20px; right:20px" href="{% url 'create' %}">Create Post</a>
+            </h1>
         </div>
         <div class="card-body" style="background: rgba(32,54,71,0.84);margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
 
@@ -35,13 +37,15 @@
 
 
     <!--******************************************************  POST TITLE SECTION  ******************************************************--->
-                                <h1 style="font-size: 35px;color: rgb(18,35,46);margin-top: 0px;background: linear-gradient(270deg, white 34%, #007cc7 91%);border-top-left-radius: 15px;border-bottom-left-radius: 0px;margin-left: -12px;"><a href="{{ obj.get_absolute_url }}" style="color: rgb(18,35,46);text-decoration:none;">{{ obj.title }}</a></h1>
+                                <h1 style="font-size: 35px;color: rgb(18,35,46);margin-top: 0px;background: linear-gradient(270deg, white 34%, #007cc7 91%);border-top-left-radius: 15px;border-bottom-left-radius: 0px;margin-left: -12px;">
+                                    <a href="{{ obj.get_absolute_url }}" style="color: rgb(18,35,46);text-decoration:none;">{{ obj.title }}</a>
+                                </h1>
                                 {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
 
 
     <!--******************************************************  POST DETAILS SECTION  ******************************************************--->
                                 <p style="margin-right: 0px;margin-left: 0px;text-align: left;">
-                                    {{ obj.content|striptags|slice:":200" }}
+                                    {{ obj.content|striptags|truncatewords_html:20 }}
 
                                 </p>
 
