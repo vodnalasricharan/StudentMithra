@@ -102,3 +102,12 @@ class Education(models.Model):
     yop=models.IntegerField(default=2000)
     qualif=models.CharField(choices=QUA,max_length=200,default='highschool')
     branch=models.CharField(max_length=200,blank=True,null=True)
+
+
+class questions(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    ques=models.CharField(max_length=300,blank=True,null=True)
+    ques_link=models.URLField(max_length=500,blank=True,null=True)
+    video=models.URLField(max_length=500,blank=True,null=True)
+    gfg=models.URLField(max_length=500,blank=True,null=True)
+    status=models.BooleanField(default=False)

@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 import os
 from .forms import *
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 
@@ -23,7 +24,25 @@ def validate_file(file):
 from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
-    return render(request,'dashboard.html')
+    account=Account.objects.get(user=request.user)
+    try:
+        resume1=Resume.objects.get(slug=account.slug1)
+    except ObjectDoesNotExist:
+        resume1=None
+    try:
+        resume2=Resume.objects.get(slug=account.slug2)
+    except ObjectDoesNotExist:
+        resume2=None
+    try:
+        resume3=Resume.objects.get(slug=account.slug3)
+    except ObjectDoesNotExist:
+        resume3=None
+    context={
+        'resume1':resume1,
+        'resume2': resume2,
+        'resume3': resume3,
+    }
+    return render(request,'dashboard.html',context=context)
 
 @login_required
 def myresume(request):
