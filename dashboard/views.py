@@ -115,6 +115,11 @@ def myresume(request):
 
     return render(request,'Resume.html')
 
+
+@login_required
+def practice(request):
+    return render(request,'practice.html')
+
 @login_required
 def profilesettings(request):
     instance=Account.objects.get(user=request.user)
@@ -128,3 +133,4 @@ def profilesettings(request):
         'instance': instance,
     }
     return render(request,'profile.html',context=context)
+

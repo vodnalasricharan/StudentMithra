@@ -12,13 +12,26 @@ from django.contrib import messages
 from .models import *
 # Create your views here.
 from dashboard.views import *
+
+
+def authenticated_user(view_func):
+	def wrapper_func(request, *args, **kwargs):
+		if request.user.is_authenticated:
+			return redirect('dashboard')
+		else:
+			return view_func(request, *args, **kwargs)
+
+	return wrapper_func
+
+
+@authenticated_user
 def homepage(request):
     account = Account.objects.all()
 
     context = {'accounts':account,}
     return render(request,'homepage.html',context)
 
-
+@authenticated_user
 def accountregister(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -50,7 +63,7 @@ def accountregister(request):
     context = {'form': form}
     return render(request, 'register.html', context)
 
-
+@authenticated_user
 def accountlogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')

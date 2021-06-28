@@ -47,7 +47,7 @@
                         {% if request.user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard' %}" style="margin-top: 15px;margin-bottom: 15px;"><i class="fas fa-tachometer-alt" style="font-size: 15px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'profilesettings' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Profile Settings</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Table</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'practice' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Practice</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'noteslist' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Notes</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'resumes' %}" style="margin-bottom: 15px;"><i class="fas fa-paperclip"></i><span>Resumes</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'posts' %}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-bookmark-dash" style="margin-right: 2px;font-size: 15px;">

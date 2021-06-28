@@ -16,7 +16,7 @@ class EducationForm(forms.ModelForm):
     class Meta:
         model=Education
         fields=[
-            'inst',
+            'inst_name',
             'yop',
             'qualif',
             'branch',
@@ -27,7 +27,7 @@ class InternshipForm(forms.ModelForm):
         model=Internship
         fields=[
             'role',
-            'organisation',
+            'Organisation',
             'discription',
         ]
 

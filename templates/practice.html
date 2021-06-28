@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head_title %}
+Practice | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+
+                <div class="container">
+                    <div class="card" style="background: rgb(18,35,46);border-radius: 15px;margin: 0px;margin-top: 0px;">
+                        <div class="card-header" style="width: 921.6px;background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                            <ul class="nav nav-tabs card-header-tabs" style="background: #12232e;margin-top: 0px;margin-right: -8px;width: 730.6px;">
+                                <li class="nav-item" style="background: #12232e;"><a class="nav-link active" href="#" style="background: rgb(255,244,76);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(18,35,46);">First Item</a></li>
+                                <li class="nav-item" style="background: #12232e;border-top-left-radius: 15px;border-top-right-radius: 15px;"><a class="nav-link" href="#" style="background: rgba(18,35,46,0.69);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(255,240,0);">Second Item</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body" style="background: rgb(255,240,0);margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                            <th style="width: 25px;">SI.No</th>
+                                            <th>Question</th>
+                                            <th style="width: 50px;">Youtube</th>
+                                            <th style="width: 76px;text-align: center;">GFG</th>
+                                            <th style="width: 50px;text-align: center;">Mark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                            <td>1</td>
+                                            <td>Find bla bla from bla bla using bla bla</td>
+                                            <td style="text-align: center;width: 76px;"><i class="fa fa-youtube-play" style="color: #ff0000;"></i></td>
+                                            <td style="text-align: center;"><i class="fas fa-lightbulb" style="color: #2bad2b;"></i></td>
+                                            <td style="text-align: center;"><button class="btn btn-primary" type="button" style="font-size: 16px;width: 127.8px;padding: 0px 0px;padding-right: 0px;">Mark As Done</button></td>
+                                        </tr>
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                            <td>2</td>
+                                            <td>Find what the hell is wrong with Kanya Rasi</td>
+                                            <td style="text-align: center;"><i class="fa fa-youtube-play" style="color: #ff0000;"></i></td>
+                                            <td style="text-align: center;"><i class="fas fa-lightbulb" style="color: rgb(43,173,42);"></i></td>
+                                            <td style="text-align: center;"><button class="btn btn-primary" type="button" style="font-size: 16px;width: 127.8px;padding: 0px 0px;padding-right: 0px;">Mark As Done</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock part %}
