@@ -37,7 +37,7 @@
     {% if instance.image %}
     <img src='{{ instance.image.url }}' class='img-responsive' />
     {% endif %}
-    <h1>{{ title }} </h1>
+    <h1 style="color:#12232e;">{{ title }} </h1>
     Created on:<small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small>
 
 <!-- {% if instance.read_time|time:"i" <= "01" %} < 1 minute {% else %}{{ instance.read_time|time:"i" }} minutes {% endif %} -->
@@ -82,7 +82,7 @@ Linkedin
 <div class='col-sm-12 '>
 
 
-   <div class='post-detail-item'>{{ instance.content|safe }}</div>
+   <div class='post-detail-item' style="color:#203647">{{ instance.content|safe }}</div>
 
     <hr/>
     <br/>
@@ -93,7 +93,9 @@ Linkedin
         {% if request.user.is_authenticated %}
         <form method="POST" action="."> {% csrf_token %}
             {{ comment_form|crispy }}
-            <input type='submit' value='Post comment' class='btn btn-default'>
+
+
+            <input type='submit' value='Post comment' class='btn btn-primary btn-sm' style="margin-top:10px;">
         </form>
         {% else %}
         <p>You must login to comment </p>
@@ -102,8 +104,8 @@ Linkedin
         {% for comment in comments %}
 
         <blockquote>
-          <p>{{ comment.content }}</p>
-          <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %}</footer>
+          <p style="color:#12232e; margin-bottom:-2px">{{ comment.content }}</p>
+          <footer style="font-size:12px">via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %}</footer>
 
 
         </blockquote>

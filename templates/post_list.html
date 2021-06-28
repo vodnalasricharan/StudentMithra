@@ -11,7 +11,7 @@
                 <a class="btn btn-primary btn-bn" role="button" style="position:absolute; top:20px; right:20px" href="{% url 'create' %}">Create Post</a>
             </h1>
         </div>
-        <div class="card-body" style="background: rgba(32,54,71,0.84);margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+        <div class="card-body" style="background: #fcffa4;margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
 
             {% for obj in object_list %}
             <div class="row" style="margin: 20px;margin-bottom: 40px;margin-right: 15px;border-radius: 15px;">
@@ -44,23 +44,23 @@
 
 
     <!--******************************************************  POST DETAILS SECTION  ******************************************************--->
-                                <p style="margin-right: 0px;margin-left: 0px;text-align: left;">
-                                    {{ obj.content|striptags|truncatewords_html:20 }}
+                                <p style="margin-right: 0px;margin-left: 0px;text-align: left;color:#203647">
+                                    {{ obj.content|striptags|truncatewords_html:50 }}
 
                                 </p>
 
 
-                                <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary btn-sm" style="" role="button">View</a></p>
+                                <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary btn-sm" role="button">View</a></p>
                             </div>
 
     <!--******************************************************  USERNAME AND DATE OF CREATION SECTION  ******************************************************--->
 
                             <div class="col" >
                                 <div class="row" style="height: 35px;border-radius: 15px;margin-left: -13px;margin-right: -13px;">
-                                    <div class="col" style="height: 35px;background: linear-gradient(270deg, white 27%, rgb(18,35,46) 84%);border-top-right-radius: 15px;border-bottom-right-radius: 15px;border-top-left-radius: 0px;border-bottom-left-radius: 15px;">
+                                    <div class="col" style="height: 35px;background: #12232e;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-left-radius: 0px;border-bottom-left-radius: 15px;">
                                         <p class="d-xxl-flex" style="margin-bottom: 5px;margin-top: 5px;color: rgb(255,255,255);">{{obj.user}}</p>
                                     </div>
-                                    <div class="col" style="height: 35px;background: linear-gradient(270deg, rgb(18,35,46) 15%, white 73%);border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 15px;margin-left: 5px;">
+                                    <div class="col" style="height: 35px;background: #12232e;border-top-left-radius: 0px;border-bottom-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 15px;margin-right: 1px;">
                                         <p class="d-xxl-flex justify-content-xxl-end" style="text-align: right;margin-top: 5px;margin-bottom: 5px;color: rgb(255,255,255);">
                                             {{obj.publish}}</p>
                                     </div>
