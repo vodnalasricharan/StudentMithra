@@ -11,3 +11,38 @@ class AccountForm(forms.ModelForm):
             'mobile_no',
             'linkedin_profile',
         ]
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model=Education
+        fields=[
+            'inst',
+            'yop',
+            'qualif',
+            'branch',
+        ]
+
+class InternshipForm(forms.ModelForm):
+    class Meta:
+        model=Internship
+        fields=[
+            'role',
+            'organisation',
+            'discription',
+        ]
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model=Project
+        fields=[
+            'title',
+            'link',
+            'discription',
+        ]
+
+class AddonForm(forms.ModelForm):
+    class Meta:
+        model=Addon
+        fields=[
+            'discription',
+        ]
