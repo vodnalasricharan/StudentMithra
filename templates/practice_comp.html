@@ -15,6 +15,17 @@ Practice | {{ block.super }}
                         </div>
                         <div class="card-body" style="background: rgb(255,240,0);margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
                             <div class="table-responsive">
+                                <button class="btn btn-sm btn-danger" style="margin-left:95%" id="myBtn"  >Reset</button>
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                  <div class="modal-content">
+                                    <span class="close" style="margin-left:90%;">&times;</span>
+                                    <p style="text-align:center;">Do you really want to Reset all questions?<br>This will Mark all questions as Not completed!</p>
+                                   <a class="btn btn-danger btn-sm" role="button"  data-inline="true" style="width:30%; margin-left:70%;" href="{% url 'practice_reset' %}">Reset</a>
+                                  </div>
+
+                                </div>
                                 <table class="table">
                                     <thead>
                                         <tr style="color: rgb(18,35,46);border-color: #616263e1;">

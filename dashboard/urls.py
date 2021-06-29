@@ -9,5 +9,6 @@ urlpatterns=[
     path('practice/',practice,name='practice'),
     path('practice/complete',practice_completed,name='practice_com'),
     path('practice/<int:pk>/delete',mark_as_completed,name='markascomp'),
-    path('practice/None',practice_none,name='practice_none')
+    path('practice/None',practice_none,name='practice_none'),
+    path('practice/reset',practice_reset,name='practice_reset'),
 ]
