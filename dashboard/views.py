@@ -5,6 +5,7 @@ from django.contrib import messages
 import os
 from .forms import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -118,8 +119,33 @@ def myresume(request):
 
 @login_required
 def practice(request):
-    return render(request,'practice.html')
+    questions_incom=questions.objects.filter(user=request.user,status=False)
+    questions_com=questions.objects.filter(user=request.user,status=True)
+    context={
+        'questions_incom':questions_incom,
+        'questions_com':questions_com,
+    }
+    return render(request,'practice.html',context)
 
+@login_required
+def mark_as_completed(request,pk):
+    instance = get_object_or_404(questions, id=pk)
+    instance.status=True
+    instance.save()
+    messages.success(request, "Question is completed")
+    return redirect('practice')
+@login_required
+def practice_completed(request):
+    questions_incom = questions.objects.filter(user=request.user, status=False)
+    questions_com = questions.objects.filter(user=request.user, status=True)
+    context = {
+        'questions_incom': questions_incom,
+        'questions_com': questions_com,
+    }
+    return render(request, 'practice_comp.html', context)
+@login_required
+def practice_none(request):
+    return render(request,'practice_none.html')
 @login_required
 def profilesettings(request):
     instance=Account.objects.get(user=request.user)

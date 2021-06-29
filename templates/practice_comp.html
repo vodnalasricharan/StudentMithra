@@ -9,8 +9,8 @@ Practice | {{ block.super }}
                     <div class="card" style="background: rgb(18,35,46);border-radius: 15px;margin: 0px;margin-top: 0px;">
                         <div class="card-header" style="width: 921.6px;background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
                             <ul class="nav nav-tabs card-header-tabs" style="background: #12232e;margin-top: 0px;margin-right: -8px;width: 730.6px;">
-                                <li class="nav-item" style="background: #12232e;"><a class="nav-link active" href="{% url 'practice' %}" style="background: rgb(255,244,76);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(18,35,46);">To Do</a></li>
-                                <li class="nav-item" style="background: #12232e;border-top-left-radius: 15px;border-top-right-radius: 15px;"><a class="nav-link" href="{% url 'practice_com' %}" style="background: rgba(18,35,46,0.69);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(255,240,0);">Completed</a></li>
+                                <li class="nav-item" style="background: #12232e;"><a class="nav-link" href="{% url 'practice' %}" style="background: rgba(18,35,46,0.69);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(255,240,0);">To_Do</a></li>
+                                <li class="nav-item" style="background: #12232e;border-top-left-radius: 15px;border-top-right-radius: 15px;"><a class="nav-link active" href="{% url 'practice_com' %}" style="background: rgb(255,244,76);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(18,35,46);">Completed</a></li>
                             </ul>
                         </div>
                         <div class="card-body" style="background: rgb(255,240,0);margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
@@ -22,17 +22,17 @@ Practice | {{ block.super }}
                                             <th>Question</th>
                                             <th style="width: 50px;">Youtube</th>
                                             <th style="width: 76px;text-align: center;">GFG</th>
-                                            <th style="width: 50px;text-align: center;">Mark</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for obj in questions_incom %}
+                                        {% for obj in questions_com %}
                                         <tr style="color: rgb(18,35,46);border-color: #616263e1;">
 <!--                                            <td>1</td>-->
                                             <td><a href="{{ obj.ques_link }}" target="_blank">{{ obj.ques }}</a></td>
                                             <td style="text-align: center;width: 76px;" ><a href="{{ obj.video }}" target="_blank"><i class="fa fa-youtube-play" style="color: #ff0000;"></i></a></td>
                                             <td style="text-align: center;"><a href="{{ obj.gfg }}" target="_blank" ><i class="fas fa-lightbulb" style="color: #2bad2b;"></i></a></td>
-                                            <td style="text-align: center;"><a class="btn btn-primary" type="button" href="{% url 'markascomp' obj.id %}" style="font-size: 16px;width: 127.8px;padding: 0px 0px;padding-right: 0px;">Mark As Done</a></td>
+
                                         </tr>
                                         {% endfor %}
                                     </tbody>

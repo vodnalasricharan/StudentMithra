@@ -47,7 +47,7 @@
 
     <!--******************************************************  POST DETAILS SECTION  ******************************************************--->
                                 <p style="margin-right: 0px;margin-left: 0px;text-align: left;color:#203647">
-                                    {{ obj.content|striptags|truncatewords_html:50 }}
+                                    {{ obj.content|safe|striptags|truncatewords_html:50 }}
 
                                 </p>
 

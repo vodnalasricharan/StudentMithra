@@ -12,6 +12,8 @@ from django.contrib import messages
 from .models import *
 # Create your views here.
 from dashboard.views import *
+from .question_list import *
+from itertools import islice
 
 
 def authenticated_user(view_func):
@@ -43,19 +45,32 @@ def accountregister(request):
             form.password2 = request.POST.get('password2')
             user = form.save()
             username = request.POST.get('username')
+            try:
+                for obj in questions_list:
+                    questions.objects.create(user=user,ques=obj[0],ques_link=obj[1],video=obj[2],gfg=obj[3],status=False)
+                Account.objects.create(
+                    user=user,
+                    name=request.POST.get('username'),
+                    email=request.POST.get('email'),
+                    slug1=''.join(
+                        random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
+                        range(10)),
+                    slug2=''.join(
+                        random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
+                        range(10)),
+                    slug3=''.join(
+                        random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
+                        range(10)),
+                )
 
-            Account.objects.create(
-                user=user,
-                name= request.POST.get('username'),
-                email = request.POST.get('email'),
-                slug1=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-                slug2=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-                slug3=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-            )
+                messages.success(request, 'Account was created for ' + username)
 
-            messages.success(request, 'Account was created for ' + username)
+                return redirect('login')
+            except:
+                messages.info(request,'something went wrong')
 
-            return redirect('login')
+            else:
+                messages.info(request,'something went wrong')
         else:
             messages.info(request,'enter correct details/user already exists')
 

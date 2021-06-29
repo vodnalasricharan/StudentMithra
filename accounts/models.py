@@ -111,3 +111,6 @@ class questions(models.Model):
     video=models.URLField(max_length=500,blank=True,null=True)
     gfg=models.URLField(max_length=500,blank=True,null=True)
     status=models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.user)+' : '+str(self.ques)
