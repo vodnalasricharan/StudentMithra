@@ -13,9 +13,9 @@ class CommentManager(models.Manager):
         return qs
 
     def filter_by_instance(self, instance):
-        content_type = ContentType.objects.get(model=instance.get_content_type)
+        content_type = ContentType.objects.get_or_create(model=instance.get_content_type)
         obj_id = instance.id
-        qs = super(CommentManager, self).filter(content_type=content_type, object_id= obj_id).filter(parent=None)
+        qs = super(CommentManager, self).filter(object_id= obj_id).filter(parent=None)
         return qs
 
     def create_by_model_type(self, model_type, slug, content, user, parent_obj=None):

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'comments',
     'notes',
     'posts',
+    'profile_settings',
     #third-party apps
     'phone_field',
     'crispy_forms',

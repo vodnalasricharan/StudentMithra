@@ -15,8 +15,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Add-Another-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Checkbox-Button-1.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Checkbox-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/checkbox.css' %}">
+    <link rel="stylesheet" href="{% static 'aassets/css/Collapsible-sidebar-left-or-right--Content-overlay.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Drag-Drop-File-Input-Upload.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/markdownit-edit-1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/markdownit-edit.css' %}">
@@ -24,6 +29,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/simple-footer.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Toggle-Checkbox.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/untitled.css' %}">
     <style>
 {% block style %}{% endblock style %}
@@ -46,14 +52,18 @@
                     <ul class="navbar-nav text-light" id="accordionSidebar">
                         {% if request.user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard' %}" style="margin-top: 15px;margin-bottom: 15px;"><i class="fas fa-tachometer-alt" style="font-size: 15px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'profilesettings' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Profile Settings</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'practice' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Practice</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'noteslist' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Notes</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'resumes' %}" style="margin-bottom: 15px;"><i class="fas fa-paperclip"></i><span>Resumes</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'posts' %}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-bookmark-dash" style="margin-right: 2px;font-size: 15px;">
                                         <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
                                         <path fill-rule="evenodd" d="M5.5 6.5A.5.5 0 0 1 6 6h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"></path>
-                                    </svg><span style="font-size: 15px;">Blog</span></a></li>
+                                    </svg><span style="font-size: 15px;">Blog</span></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="height: 15px;font-size: 15px;margin-right: 5px;">
+                                <path d="M8.51428 20H4.51428C3.40971 20 2.51428 19.1046 2.51428 18V6C2.51428 4.89543 3.40971 4 4.51428 4H8.51428V6H4.51428V18H8.51428V20Z" fill="currentColor"></path>
+                                <path d="M13.8418 17.385L15.262 15.9768L11.3428 12.0242L20.4857 12.0242C21.038 12.0242 21.4857 11.5765 21.4857 11.0242C21.4857 10.4719 21.038 10.0242 20.4857 10.0242L11.3236 10.0242L15.304 6.0774L13.8958 4.6572L7.5049 10.9941L13.8418 17.385Z" fill="currentColor"></path>
+                            </svg><span style="font-size: 15px;">Logout</span></a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Login</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Register</span></a></li>
@@ -72,16 +82,20 @@
 <!--                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." style="background: rgb(238,251,251);"><button class="btn btn-primary py-0" type="button" style="background: rgb(18,35,46);"><i class="fas fa-search"></i></button></div>-->
 <!--                        </form>-->
                         {% if request.user.is_authenticated %}
+
                         <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="{% static 'assets/img/avatars/avatar1.jpeg' %}"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                    </div>
-                                </div>
-                            </li>
+                            <li class="nav-item dropdown no-arrow"></li>
                         </ul>
+                        <div class="dropstart d-xxl-flex" style="width: 56px;height: 48px;text-align: center;color: rgba(133,135,150,0);"><a class="d-lg-flex justify-content-lg-center align-items-lg-center" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="width: 56px;height: 56px;text-align: center;color: rgba(78,115,223,0);margin-bottom: 0px;"><i class="icon ion-android-settings d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 32px;height: 32px;font-size: 32px;text-align: center;margin: 0px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;color: rgb(248,249,252);padding-bottom: 0px;"></i></a>
+                            <div class="dropdown-menu dropdown-menu-dark text-start" style="width: 213px;">
+                                <a class="dropdown-item" href="{% url 'profilesettings' %}">Personal Information</a>
+                                <a class="dropdown-item" href="blank-6.html">Educational Info</a>
+                                <a class="dropdown-item" href="blank-7.html">Internships</a>
+                                <a class="dropdown-item" href="blank-8.html">Projects</a>
+                                <a class="dropdown-item" href="blank-9.html">Coding Profiles</a>
+                                <a class="dropdown-item" href="blank-10.html">Achievemenets</a>
+                            </div>
+                        </div>
                         {% endif %}
                     </div>
                 </nav>
@@ -104,12 +118,15 @@
     <script>{% block script %} {% endblock script %}</script>
         <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'assets/js/bs-init.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+        <script src="{% static 'assets/js/Collapsible-sidebar-left-or-right--Content-overlay.js' %}"></script>
         <script src="{% static 'assets/js/markdownit-edit-1.js' %}"></script>
         <script src="{% static 'assets/js/markdownit-edit-2.js' %}"></script>
         <script src="{% static 'assets/js/markdownit-edit-3.js' %}"></script>
         <script src="{% static 'assets/js/markdownit-edit.js' %}"></script>
         <script src="{% static 'assets/js/Table-With-Search.js' %}"></script>
         <script src="{% static 'assets/js/theme.js' %}"></script>
+        <script src="{% static 'assets/js/Toggle-Checkbox.js' %}"></script>
 
 
 </body>
