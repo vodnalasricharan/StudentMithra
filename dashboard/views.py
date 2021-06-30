@@ -52,6 +52,8 @@ def dashboard(request):
         resume3=Resume.objects.get(slug=account.slug3)
     except ObjectDoesNotExist:
         resume3=None
+
+    coding_objs=codinglinks.objects.filter(user=request.user)
     context={
         'resume1':resume1,
         'resume2': resume2,
@@ -59,14 +61,20 @@ def dashboard(request):
         'account':account,
         'education':education,
         'achieve':achieve,
+        'coding_objs':coding_objs,
     }
     return render(request,'dashboard.html',context=context)
 
 @login_required
 def myresume(request):
+    acc=Account.objects.get(user=request.user)
+    res1=Resume.objects.filter(slug=acc.slug1).first()
+    res2 = Resume.objects.filter(slug=acc.slug2).first()
+    res3 = Resume.objects.filter(slug=acc.slug3).first()
     if request.method == 'POST':
         try:
-            if request.POST.get("form_type") == 'resume1' and request.FILES['resume1']:
+            print(request.POST.get("form_type"))
+            if request.POST.get("form_type") == 'resume1':
                 myfile = request.FILES['resume1']
                 try:
                     validate_file(myfile)
@@ -85,11 +93,11 @@ def myresume(request):
                 r1.user=account.user
                 r1.save()
                 messages.success(request,'Resume1 was upadted with '+myfile.name)
-                return render(request,'Resume.html')
-            elif request.POST.get("form_type") == 'resume2' and request.FILES['resume2']:
+                return redirect('resumes')
+            elif request.POST.get("form_type") == 'resume2':
                 myfile = request.FILES['resume2']
                 try:
-                    validate_file(myfile.name)
+                    validate_file(myfile)
                 except ValidationError:
                     messages.info(request,'only pdf/doc/docx files allowed and max file size is 2MB')
                     return render(request, 'Resume.html')
@@ -104,11 +112,11 @@ def myresume(request):
                 r1.resume = myfile
                 r1.save()
                 messages.success(request,'Resume2 was upadted with '+myfile.name)
-                return render(request,'Resume.html')
-            elif request.POST.get("form_type") == 'resume3' and request.FILES['resume3']:
+                return redirect('resumes')
+            elif request.POST.get("form_type") == 'resume3':
                 myfile = request.FILES['resume3']
                 try:
-                    validate_file(myfile.name)
+                    validate_file(myfile)
                 except ValidationError:
                     messages.info(request,'only pdf/doc/docx files allowed')
                     return render(request, 'Resume.html')
@@ -123,16 +131,19 @@ def myresume(request):
                 r1.resume = myfile
                 r1.save()
                 messages.success(request,'Resume3 was upadted with '+myfile.name)
-                return render(request,'Resume.html')
+                return redirect('resumes')
             else:
                 messages.info(request,'Something went wrong please try again')
-                return render(request,'Resume.html')
+                return redirect('resumes')
         except:
             messages.info(request, 'Something went wrong please try again')
-            return render(request, 'Resume.html')
-
-    return render(request,'Resume.html')
-
+            return redirect('resumes')
+    context={
+        'resume1':res1,
+        'resume2':res2,
+        'resume3':res3,
+    }
+    return render(request,'Resume.html',context)
 
 @login_required
 def practice(request):
@@ -170,7 +181,8 @@ def practice_reset(request):
 
 @login_required
 def practice_none(request):
-    return render(request,'practice_none.html')
+    messages.info(request,'Link doesnot exists')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required

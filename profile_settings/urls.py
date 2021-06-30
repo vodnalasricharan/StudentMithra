@@ -21,4 +21,8 @@ urlpatterns=[
 
 
     path('achievements/',achievements,name='achievements'),
+    path('coding_links/',coding,name='coding_links'),
+    path('add_coding_links',add_coding,name='add_coding'),
+    path('update_coding_links/<int:pk>/',update_coding,name='update_coding'),
+    path('delete_coding_links/<int:pk>/',delete_coding,name='delete_coding'),
     ]

@@ -10,6 +10,7 @@ class AccountForm(forms.ModelForm):
             'address',
             'mobile_no',
             'linkedin_profile',
+            'profile_pic',
         ]
 
 class EducationForm(forms.ModelForm):
@@ -47,4 +48,10 @@ class AddonForm(forms.ModelForm):
         fields=[
             'Achievements',
         ]
-
+class CodingForm(forms.ModelForm):
+    class Meta:
+        model=codinglinks
+        fields=[
+            'platform',
+            'link',
+        ]

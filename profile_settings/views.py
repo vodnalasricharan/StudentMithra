@@ -7,6 +7,7 @@ from dashboard.forms import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.templatetags.static import static
 # Create your views here.
 
 @login_required
@@ -24,8 +25,9 @@ def profilesettings(request):
     else:
         form = AccountForm(instance=profile)
     context = {
-        'title': 'create',
+        'title': 'Update',
         'form': form,
+        'profile':profile,
     }
     return render(request, 'personal.html', context=context)
 
@@ -195,3 +197,85 @@ def achievements(request):
                'title': 'Apply Changes', }
     return render(request, 'achievements.html', context=context)
 
+#************************************************************************** coding profiles ******************************************************************
+
+@login_required
+def coding(request):
+    c_links=codinglinks.objects.filter(user=request.user)
+
+    context = {'c_links': c_links,
+               'title': "Coding Profiles",
+               }
+    return render(request,'coding_profiles.html',context)
+
+@login_required
+def add_coding(request):
+    form = CodingForm(request.POST or None, request.FILES or None)
+    if request.method == "POST":
+        if form.is_valid():
+            inst = form.save(commit=False)
+            inst.user=request.user
+            if inst.platform == 'leetcode' :
+                inst.image=static('/assets/img/7xInX10u_400x400.jpg')
+            elif inst.platform == 'hackerrank':
+                inst.image = static('/assets/img/HackerRank_Icon-1000px.png')
+            elif inst.platform == 'codechef':
+                inst.image = static('/assets/img/codechef.png')
+            elif inst.platform == 'codeforces':
+                inst.image = static('/assets/img/codeforces.jpg')
+            elif inst.platform == 'gfg' :
+                inst.image = static('/assets/img/QNHrwL2q.jpg')
+            else:
+                inst.image = static('/assets/img/0f8b2870896edcde8f6149fe2733faaf.jpg')
+
+            inst.save()
+            messages.success(request,'succesfully added')
+            return redirect('coding_links')
+
+    context = {
+        "form": form,
+        "title": "Add Coding Links",
+        "update": False,
+    }
+    return render(request,'coding_form.html',context)
+
+
+@login_required
+def update_coding(request,pk):
+    c_link=codinglinks.objects.get(id=pk)
+    form = CodingForm(request.POST or None, instance=c_link)
+    if request.method == "POST":
+        if form.is_valid():
+            inst = form.save(commit=False)
+            inst.user = request.user
+            if inst.platform == 'leetcode':
+                inst.image = static('/assets/img/7xInX10u_400x400.jpg')
+            elif inst.platform == 'hackerrank':
+                inst.image = static('/assets/img/HackerRank_Icon-1000px.png')
+            elif inst.platform == 'codechef':
+                inst.image = static('/assets/img/codechef.png')
+            elif inst.platform == 'codeforces':
+                inst.image = static('/assets/img/codeforces.jpg')
+            elif inst.platform == 'gfg':
+                inst.image = static('/assets/img/QNHrwL2q.jpg')
+            else:
+                inst.image = static('/assets/img/0f8b2870896edcde8f6149fe2733faaf.jpg')
+
+            inst.save()
+            messages.success(request, 'succesfully updated')
+            return redirect('coding_links')
+
+    context = {
+        "form": form,
+        "title": "Update Coding Links",
+        "update": True,
+        "c_link":c_link,
+    }
+    return render(request, 'coding_form.html', context)
+
+@login_required
+def delete_coding(request,pk):
+    instance=get_object_or_404(codinglinks,id=pk)
+    instance.delete()
+    messages.success(request, "Successfully deleted")
+    return redirect('coding_links')

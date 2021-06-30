@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-lg-6 mb-4" style="width: 381.8px;">
                             <div class="card shadow mb-4" style="width: 330px;height: 330px;border-radius: 15px;border-color: rgba(133,135,150,0);border-top-color: rgb(133,;border-right-color: 135,;border-bottom-color: 150);border-left-color: 135,;">
-                                <div class="card-body" style="width: 330px;height: 330px;border-radius: 15px;border-color: rgba(133,135,150,0);"><img class="border rounded-circle" style="width: 220px;height: 220px;margin: 40px 0px 0px 39px;margin-top: 39px;margin-bottom: 0px;text-align: center;margin-right: 0px;padding-top: 0px;margin-left: 39px;" src="{% static 'assets/img/dogs/image3.jpeg' %}"></div>
+                                <div class="card-body" style="width: 330px;height: 330px;border-radius: 15px;border-color: rgba(133,135,150,0);"><img class="border rounded-circle" style="width: 220px;height: 220px;margin: 40px 0px 0px 39px;margin-top: 39px;margin-bottom: 0px;text-align: center;margin-right: 0px;padding-top: 0px;margin-left: 39px;" src="{{ account.profile_pic.url }}"></div>
                             </div>
                             <div class="card shadow mb-4" style="width: 330px;height: 330px;border-radius: 15px;">
                                 <div class="card-body" style="width: 330px;height: 330px;">
@@ -136,6 +136,9 @@
                                 </div>
                                 <div class="card-body" style="background: #eefbfb;border-radius: 15px;border-top-left-radius: 0px;border-top-right-radius: 0px;">
                                     <div class="row">
+                                        {% for obj in coding_objs %}
+                                        <div class="col text-center" ><a href="{{ obj.link }}"><img src="{% static '{{ obj.image.url }}' %}">{{ obj.image.url }}</a></div>
+                                        {% endfor %}
                                         <div class="col text-center" style="margin: 5px;margin-right: 0px;"><img src="{% static 'assets/img/7xInX10u_400x400.jpg' %}" style="width: 100px;"></div>
                                         <div class="col text-center" style="margin: 5px;margin-right: 0px;"><img src="{% static 'assets/img/0f8b2870896edcde8f6149fe2733faaf.jpg' %}" style="width: 100px;"></div>
                                         <div class="col text-center" style="margin-right: 0px;margin-top: 5px;"><img src="{% static 'assets/img/QNHrwL2q.jpg' %}" style="width: 100px;"></div>

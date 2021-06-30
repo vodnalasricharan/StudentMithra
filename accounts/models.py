@@ -36,7 +36,7 @@ class Account(models.Model):
     email = models.CharField(max_length=200, null=True, validators=[validate_email])
     date_created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
     gender = models.CharField(choices=GEN,max_length=10,blank=True,null=True)
-    # profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
+    profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
     mobile_no= PhoneNumberField(blank=True)
     slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
     slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
@@ -57,19 +57,17 @@ class Resume(models.Model):
 
 class codinglinks(models.Model):
     PLT=(
-        ('Leetcode','leetcode'),
-        ('Hackerrank','hackerrank'),
-        ('codechef','codechef'),
-        ('codeforces','codeforces'),
-        ('Topcoder','topcoder'),
-        ('codewar','codewar'),
-        ('coderbyte','coderbyte'),
-        ('other','other'),
+        ('leetcode','Leetcode'),
+        ('hackerrank','Hackerrank'),
+        ('codechef','Codechef'),
+        ('codeforces','Codeforces'),
+        ('gfg','GeeksForGeeks'),
+        ('other','Other'),
     )
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     platform=models.CharField(choices=PLT,max_length=200,default='leetcode')
-    image=models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='codinglinks')
-    link=models.URLField(max_length=500,null=False,blank=True)
+    image=models.ImageField(null=True, blank=True, validators=[validate_image],upload_to='codinglinks')
+    link=models.URLField(max_length=500)
     def __str__(self):
         return self.link
 
