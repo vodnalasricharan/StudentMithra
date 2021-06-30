@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import *
-from phone_field import PhoneField
+from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 # Create your models here.
@@ -37,7 +37,7 @@ class Account(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
     gender = models.CharField(choices=GEN,max_length=10,blank=True,null=True)
     # profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
-    mobile_no= PhoneField(blank=True)
+    mobile_no= PhoneNumberField(blank=True)
     slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
     slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
     slug3 = models.CharField(max_length=20, blank=True,unique=True,null=True)
@@ -77,17 +77,23 @@ class Internship(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     role=models.CharField(max_length=50,null=False)
     Organisation=models.CharField(max_length=100,null=False)
-    discription=models.CharField(max_length=1000,null=False)
+    description=models.CharField(max_length=1000,null=False)
+
+    def __str__(self):
+        return self.role
 
 class Project(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     title=models.CharField(max_length=100,null=False)
     link=models.URLField(max_length=500,null=True,blank=True)
-    discription=models.CharField(max_length=1000,null=False)
+    description=models.CharField(max_length=1000,null=False)
+
+    def __str__(self):
+        return self.title
 
 class Addon(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    discription=models.CharField(max_length=500,null=False)
+    user=models.OneToOneField(User,blank=True,null=True,on_delete=models.CASCADE)
+    Achievements=models.CharField(max_length=500,default='-')
 
 class Education(models.Model):
     QUA=(
@@ -97,11 +103,15 @@ class Education(models.Model):
         ('Degree','degree'),
         ('HighSchool','highschool'),
     )
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.OneToOneField(User,blank=True,null=True,on_delete=models.CASCADE)
     inst_name=models.CharField(max_length=200)
     yop=models.IntegerField(default=2000)
     qualif=models.CharField(choices=QUA,max_length=200,default='highschool')
     branch=models.CharField(max_length=200,blank=True,null=True)
+
+
+    def __str__(self):
+        return self.inst_name
 
 
 class questions(models.Model):
@@ -114,3 +124,4 @@ class questions(models.Model):
 
     def __str__(self):
         return str(self.user)+' : '+str(self.ques)
+

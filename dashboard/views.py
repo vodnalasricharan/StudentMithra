@@ -29,6 +29,17 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
     account=Account.objects.get(user=request.user)
+
+    try:
+        education=Education.objects.get(user= request.user)
+    except Education.DoesNotExist:
+        education = None
+
+    try:
+        achieve=Addon.objects.get(user= request.user)
+    except Addon.DoesNotExist:
+        achieve = None
+
     try:
         resume1=Resume.objects.get(slug=account.slug1)
     except ObjectDoesNotExist:
@@ -45,6 +56,9 @@ def dashboard(request):
         'resume1':resume1,
         'resume2': resume2,
         'resume3': resume3,
+        'account':account,
+        'education':education,
+        'achieve':achieve,
     }
     return render(request,'dashboard.html',context=context)
 
@@ -157,6 +171,8 @@ def practice_reset(request):
 @login_required
 def practice_none(request):
     return render(request,'practice_none.html')
+
+
 @login_required
 def profilesettings(request):
     instance=Account.objects.get(user=request.user)

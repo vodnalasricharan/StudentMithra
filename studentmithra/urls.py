@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^api/notes/', include(("notes.api.urls",'posts-api'), namespace='notes-api')),
     # url(r'^notes/',include(("notes.urls",'notes'),namespace='notes')),
     path('notes/',include('notes.urls')),
-    path('profile_settings',include('profile_settings.urls')),
+    path('profile_settings/',include('profile_settings.urls')),
 ]
 
 if settings.DEBUG:

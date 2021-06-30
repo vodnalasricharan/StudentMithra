@@ -89,11 +89,11 @@
                         <div class="dropstart d-xxl-flex" style="width: 56px;height: 48px;text-align: center;color: rgba(133,135,150,0);"><a class="d-lg-flex justify-content-lg-center align-items-lg-center" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="width: 56px;height: 56px;text-align: center;color: rgba(78,115,223,0);margin-bottom: 0px;"><i class="icon ion-android-settings d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 32px;height: 32px;font-size: 32px;text-align: center;margin: 0px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;color: rgb(248,249,252);padding-bottom: 0px;"></i></a>
                             <div class="dropdown-menu dropdown-menu-dark text-start" style="width: 213px;">
                                 <a class="dropdown-item" href="{% url 'profilesettings' %}">Personal Information</a>
-                                <a class="dropdown-item" href="blank-6.html">Educational Info</a>
-                                <a class="dropdown-item" href="blank-7.html">Internships</a>
-                                <a class="dropdown-item" href="blank-8.html">Projects</a>
+                                <a class="dropdown-item" href="{% url 'edu_settings' %}">Educational Info</a>
+                                <a class="dropdown-item" href="{%url 'internships' %}">Internships</a>
+                                <a class="dropdown-item" href="{% url 'projects' %}">Projects</a>
                                 <a class="dropdown-item" href="blank-9.html">Coding Profiles</a>
-                                <a class="dropdown-item" href="blank-10.html">Achievemenets</a>
+                                <a class="dropdown-item" href="{% url 'achievements' %}">Achievemenets</a>
                             </div>
                         </div>
                         {% endif %}

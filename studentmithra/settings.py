@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'posts',
     'profile_settings',
     #third-party apps
-    'phone_field',
+    'phonenumber_field',
     'crispy_forms',
     'markdown_deux',
     'pagedown',

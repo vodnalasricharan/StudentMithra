@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load crispy_forms_tags %}
 {%load static%}
 {% block head_title %}
 Personal Settings | {{ block.super }}
@@ -9,42 +10,13 @@ Personal Settings | {{ block.super }}
                     <div class="row mb-3">
                         <div class="col-lg-4" style="border-radius: 15px;">
                             <div class="card mb-3" style="border-radius: 15px;">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/dogs/image2.jpeg" width="160" height="160" style="padding-top: 0px;margin-left: 0px;">
+                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{% static 'assets/img/dogs/image2.jpeg'%}" width="160" height="160" style="padding-top: 0px;margin-left: 0px;">
                                     <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Photo</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="row mb-3 d-none">
-                                <div class="col">
-                                    <div class="card textwhite bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            <div class="row mb-2">
-                                                <div class="col">
-                                                    <p class="m-0">Peformance</p>
-                                                    <p class="m-0"><strong>65.2%</strong></p>
-                                                </div>
-                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                            </div>
-                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card textwhite bg-success text-white shadow">
-                                        <div class="card-body">
-                                            <div class="row mb-2">
-                                                <div class="col">
-                                                    <p class="m-0">Peformance</p>
-                                                    <p class="m-0"><strong>65.2%</strong></p>
-                                                </div>
-                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                            </div>
-                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col">
                                     <div class="card border-dark shadow mb-3" style="border-radius: 15px;">
@@ -52,38 +24,14 @@ Personal Settings | {{ block.super }}
                                             <p class="m-0 fw-bold" style="color: #ffffff;">Personal Information</p>
                                         </div>
                                         <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;">
-                                            <form>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);"><strong>Full Name</strong><br></label><input class="form-control" type="text" id="username" placeholder="Name" name="FullName" style="background: #ffffff;"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);"><strong>Gender</strong><br></label><select class="form-select">
-                                                                <optgroup label="Select Gender">
-                                                                    <option value="12" selected="">Female</option>
-                                                                    <option value="13">Male</option>
-                                                                    <option value="14">Other</option>
-                                                                </optgroup>
-                                                            </select></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email" style="color: rgb(18,35,46);"><strong>Email</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
-                                                    </div>
+                                            <form method='POST' action=''>
+                                                {% csrf_token %}
+                                                {{ form.media.css }}
+                                                {{  form.media.js }}
+                                                {{ form|crispy }}
+                                                <div class="mb-3" style="margin-top: 5px;">
+                                                    <button class="btn btn-primary btn-sm" type="submit">{{title}}</button>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3" style="background: #eefbfb;"><label class="form-label" for="first_name" style="color: rgb(18,35,46);"><strong>City, State</strong><br></label><input class="form-control" type="text" id="first_name-1" placeholder="John" name="first_name"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="last_name" style="color: rgb(18,35,46);"><strong>Contact Number</strong><br></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name" style="color: rgb(18,35,46);"><strong>LinkedIn Profile</strong><br></label><input class="form-control" type="text" id="first_name-2" placeholder="Link to your profile" name="first_name"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3" style="margin-top: 5px;"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
                                             </form>
                                         </div>
                                     </div>
@@ -92,4 +40,16 @@ Personal Settings | {{ block.super }}
                         </div>
                     </div>
                 </div>
+
+<script>
+
+	var form_fields = document.getElementsByTagName('input')
+	form_fields[2].placeholder='Phone number specified with country code';
+
+
+</script>
+
+
+
 {% endblock part %}
+

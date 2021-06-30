@@ -1,0 +1,110 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block head_title %}
+Internship Settings | {{ block.super }}
+{% endblock head_title %}
+{% block style %}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+{% endblock style %}
+
+{% block part%}
+                <div class="container-fluid" style="background: #4da8da;">
+                    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Internship Settings</h2>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card border-dark shadow mb-3" style="border-radius: 15px;">
+                                        <div class="card-header py-3" style="background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                                            <p class="m-0 fw-bold" style="color: #ffffff;">Internship Details
+                                                {% if update == True %}
+                                              <button class="btn btn-danger btn-sm" id="myBtn" style="position:absolute; top:20px; right:10px;">Delete</button>
+
+                                                <!-- The Modal -->
+                                                <div id="myModal" class="modal">
+
+                                                  <!-- Modal content -->
+                                                  <div class="modal-content">
+                                                    <span class="close" style="margin-left:90%;">&times;</span>
+                                                    <p style="text-align:center;">Do you really want to delete?</p>
+                                                   <a class="btn btn-danger btn-sm" role="button"  data-inline="true" style="width:30%; margin-left:70%;" href="{% url 'intern_delete' internship.id %} ">Delete</a>
+                                                  </div>
+
+                                                </div>
+                                        {% endif %}
+                                    </p>
+
+                                        </div>
+                                        <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;">
+                                            <form method='POST' action=''>
+                                                {% csrf_token %}
+                                                {{ form.media.css }}
+                                                {{  form.media.js }}
+                                                {{ form|crispy }}
+                                                <div class="mb-3" style="margin-top: 8px;">
+                                                    <button class="btn btn-primary btn-sm" type="submit">{{title}}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+{% endblock part %}
+{% block script %}
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+{% endblock script %}

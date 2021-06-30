@@ -16,7 +16,8 @@
                                     <p class="m-0 fw-bold" style="color: #ffffff;">{{title}}</p>
                                 </div>
                                 <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
-                                    <form method='POST' action=''>{% csrf_token %}
+                                    <form method='POST' action=''>
+                                        {% csrf_token %}
                                         {{ form.media.css }}
                                         {{  form.media.js }}
                                         {{ form|crispy }}

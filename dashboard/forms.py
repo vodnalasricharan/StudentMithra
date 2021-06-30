@@ -28,7 +28,7 @@ class InternshipForm(forms.ModelForm):
         fields=[
             'role',
             'Organisation',
-            'discription',
+            'description',
         ]
 
 class ProjectForm(forms.ModelForm):
@@ -37,12 +37,14 @@ class ProjectForm(forms.ModelForm):
         fields=[
             'title',
             'link',
-            'discription',
+            'description',
         ]
 
 class AddonForm(forms.ModelForm):
+    Achievements = forms.CharField(widget=forms.Textarea(attrs={'style': 'height:150px;width:700px'}))
     class Meta:
         model=Addon
         fields=[
-            'discription',
+            'Achievements',
         ]
+

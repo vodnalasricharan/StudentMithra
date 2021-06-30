@@ -45,12 +45,13 @@
 
 
 <div class="container">
-    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Projects</h2>
+    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Internships</h2>
                     <div class="card shadow" style="border-radius: 15px;margin-bottom: 15px;">
                         <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
                                 <div>
-                                    <p class="m-0 fw-bold" style="color: #ffffff;">Project Details
-                                        <a class="btn btn-sm btn-primary" role="button" style="position:absolute; top:11.5px; right:15px;" data-inline="true" href="{% url 'add_project' %}">Add Project</a>
+
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Internship Details
+                                    <a class="btn btn-sm btn-primary" role="button" style="position:absolute; top:11.5px; right:15px;" data-inline="true" href="{% url 'addintern' %}">Add</a>
                                     </p>
                                 </div>
 
@@ -62,20 +63,22 @@
                                 <table class="table">
                                     <thead>
                                         <tr style="color: rgb(18,35,46);border-color: #616263e1;">
-                                            <th style="width: 300px;">Title</th>
-                                            <th>Link</th>
+                                            <th style="width: 300px;">Role</th>
+                                            <th>Organisation</th>
                                             <th>Description</th>
-                                            <th style="width: 50px;">Edit</th>
+                                            <th style="width: 50px;">edit</th>
+
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for project in projects %}
+                                        {% for intern in internships %}
                                         <tr>
-                                            <td><b>{{project.title}}</b></td>
-                                            <td><a href="{{project.link}}" target="_blank">{{project.link}}</a></td>
-                                            <td><b>{{project.description}} </b></td>
-                                            <td><a href="{% url 'update_project' project.id %}" ><img class="border rounded-circle" src="{% static 'assets/img/edit.png' %}" style="width: 20px;height: 20px;"></a></td>
-
+                                            <td><b>{{intern.role}}</b></td>
+                                            <td><b>{{intern.Organisation}} </b></td>
+                                            <td><b>{{intern.description}} </b></td>
+                                            <td><a href="{% url 'intern_update' intern.id %}" ><img class="border rounded-circle" src="{% static 'assets/img/edit.png' %}" style="width: 20px;height: 20px;"></a></td>
                                         </tr>
                                         {%endfor%}
                                     </tbody>

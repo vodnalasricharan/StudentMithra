@@ -59,28 +59,32 @@
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Name</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">J.Varun Teja</h4>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {{account.name}}</h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Institute</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {{education.inst_name}}</h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Qualification</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {{education.qualif}}</h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>LinkedIn Profile</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {{account.linkedin_profile}}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +98,8 @@
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>E-mail</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {{account.email}}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -105,7 +110,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
+                                                <div class="mb-3"><label class="form-label" for="mobile_no" style="color: rgb(18,35,46);font-size: 16px;"><strong>Contact</strong><br></label>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {{account.mobile_no}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
+                                </div>
+                            </div>
+                            <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
+                                <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                    <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                        <p class="m-0 fw-bold" style="color: #ffffff;">Achievements</p>
+                                    </div>
+                                    <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">{{achieve.Achievements}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="card shadow mb-3" style="border-radius: 15px;background: rgba(255,255,255,0);border-color: rgba(133,135,150,0);">
