@@ -6,6 +6,9 @@
 {% block head_title %}
 {{ request.user }} | {{ block.super }}
 {% endblock head_title %}
+{% block style %}
+{% endblock style%}
+
 {% block part %}
 
                 <div class="container-fluid" style="background: #4da8da;">
@@ -30,23 +33,36 @@
                                 <div class="card-body" style="background: #eefbfb;height: 144.2px;width: 330px;margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
                                     <div class="row text-center d-xxl-flex" style="height: 40px;margin-top: -6px;margin-bottom: 5px;color: rgb(18,35,46);border-radius: 15px;border-top-left-radius: 15px;background: #eefbfb;">
                                         <div class="col-6 d-xl-flex">
-                                            <a href="#"><h3 class="d-xl-flex" style="text-align: center;font-size: 20px;font-family: Nunito, sans-serif;font-weight: bold;margin: 8px;margin-bottom: 0px;height: 23px;">Resume 1</h3></a>
+                                            <a href="{{ resume1.resume.url }}" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black">
+                                                <h3 class="d-xl-flex" style="text-align: center;font-size: 20px; font-family: Nunito, sans-serif;font-weight: bold;margin: 8px;margin-bottom: 0px;height: 23px;">Resume 1</h3>
+                                            </a>
                                         </div>
                                         <div class="col-2 offset-4 d-xl-flex justify-content-xl-center align-items-xl-center"><i class="fa fa-share d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align: center;font-size: 20px;"></i></div>
                                     </div>
                                     <div class="row" style="margin-bottom: 5px;color: rgb(18,35,46);background: #eefbfb;height: 40px;border-radius: 15px;">
                                         <div class="col-6 d-xl-flex justify-content-xl-start align-items-xl-center">
-                                            <h3 class="d-xl-flex" style="text-align: center;font-size: 20px;font-family: Nunito, sans-serif;font-weight: bold;margin: 8px;color: rgb(18,35,46);">Resume 2</h3>
+                                            <a href="{{ resume1.resume.url }}" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black">
+                                                <h3 class="d-xl-flex" style="text-align: center;font-size: 20px;font-family: Nunito, sans-serif;font-weight: bold;margin: 8px;">Resume 2</h3>
+                                            </a>
                                         </div>
                                         <div class="col-2 offset-4 d-xl-flex justify-content-xl-center align-items-xl-center"><i class="fa fa-share d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align: center;font-size: 20px;"></i></div>
                                     </div>
                                     <div class="row" style="margin-bottom: 5px;color: rgb(18,35,46);background: #eefbfb;height: 40px;border-radius: 15px;">
                                         <div class="col-6 d-xl-flex justify-content-xl-start align-items-xl-center">
-                                            <h3 class="d-xl-flex" style="text-align: center;font-size: 20px;font-family: Nunito, sans-serif;font-weight: bold;margin: 8px;">Resume 3</h3>
+                                            <a href="{{ resume3.resume.url }}" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black">
+                                                <h3 class="d-xl-flex" style="text-align: center;font-size: 20px;font-family: Nunito, sans-serif;font-weight: bold;margin: 8px;">Resume 3</h3>
+                                            </a>
                                         </div>
                                         <div class="col-2 offset-4 d-xl-flex justify-content-xl-center align-items-xl-center"><i class="fa fa-share d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align: center;font-size: 20px;"></i></div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card shadow mb-4" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                    <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                        <p class="m-0 fw-bold" style="color: #ffffff;">Achievements</p>
+                                    </div>
+                                    <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">{{achieve.Achievements}}
+                                    </div>
                             </div>
                         </div>
                         <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
@@ -58,63 +74,104 @@
                                     <form>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Name</strong><br></label>
+                                                <div class="mb-3"><label class="form-label"style="color: rgb(18,35,46);font-size: 16px;"><strong>Name</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {{account.name}}</h4>
+                                                        {% if account.name is not None %}
+                                                            {{account.name}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Institute</strong><br></label>
+                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>Institute</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {{education.inst_name}}</h4>
+                                                        {% if education.inst_name is not None %}
+                                                            {{education.inst_name}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+                                                        </h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Qualification</strong><br></label>
+                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>Qualification</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {{education.qualif}}</h4>
+                                                        {% if education.qualif is not None %}
+                                                            {{education.qualif}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>LinkedIn Profile</strong><br></label>
+                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>LinkedIn Profile</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {{account.linkedin_profile}}</h4>
+                                                        {% if account.linkedin_profile is not None %}
+                                                            {{account.linkedin_profile}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>GitHub&nbsp;Profile</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>E-mail</strong><br></label>
+                                                <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>GitHub&nbsp;Profile</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {{account.email}}</h4>
+                                                        {% if education.qualif is not None %}
+                                                            github
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="username" style="color: rgb(18,35,46);font-size: 16px;"><strong>Skills</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" for="mobile_no" style="color: rgb(18,35,46);font-size: 16px;"><strong>Contact</strong><br></label>
+                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>E-mail</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {{account.mobile_no}}</h4>
+                                                        {% if account.email is not None %}
+                                                            {{account.email}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+<!--                                        <div class="row">-->
+<!--                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">-->
+<!--                                                <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>Skills</strong><br></label>-->
+<!--                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">Heading</h4>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                        <div class="row">
+                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
+                                                <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>Contact</strong><br></label>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {% if account.mobile_no is not None %}
+                                                            {{account.mobile_no}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,9 +181,59 @@
                             <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
                                 <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
                                     <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
-                                        <p class="m-0 fw-bold" style="color: #ffffff;">Achievements</p>
+                                        <p class="m-0 fw-bold" style="color: #ffffff;">Projects</p>
                                     </div>
-                                    <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">{{achieve.Achievements}}
+                                    <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                                        <th style="width: 300px;">Title</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for project in projects %}
+                                                    <tr>
+
+                                                        <td>
+                                                            <a href="{{project.link}}" target="_blank" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">{{project.title}}</a></td>
+                                                        <td style="color: #000;">{{project.description}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
+
+                                <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                    <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                        <p class="m-0 fw-bold" style="color: #ffffff;">Internships</p>
+                                    </div>
+                                    <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                                        <th style="width: 300px;">Title</th>
+                                                        <th>Organisation</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for internship in internships %}
+                                                    <tr>
+
+                                                        <td><b>{{internship.role}}</b></td>
+                                                        <td><b>{{internship.Organisation}}</b></td>
+                                                        <td><b>{{internship.description}} </b></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +246,11 @@
                                         {% for obj in coding_objs %}
                                         <div class="col text-center" ><a href="{{ obj.link }}"><img src="{% static '{{ obj.image.url }}' %}">{{ obj.image.url }}</a></div>
                                         {% endfor %}
-                                        <div class="col text-center" style="margin: 5px;margin-right: 0px;"><img src="{% static 'assets/img/7xInX10u_400x400.jpg' %}" style="width: 100px;"></div>
+                                        <div class="col text-center" style="margin: 5px;margin-right: 0px;">
+                                            <a href="https://www.geeksforgeeks.org/" target="_blank">
+                                                <img alt="gfg" src="https://breakinghierarchy.com/kantar-off-campus-drive-2021-hiring-for-analyst/" width=100" height="100">
+                                            </a>
+                                        </div>
                                         <div class="col text-center" style="margin: 5px;margin-right: 0px;"><img src="{% static 'assets/img/0f8b2870896edcde8f6149fe2733faaf.jpg' %}" style="width: 100px;"></div>
                                         <div class="col text-center" style="margin-right: 0px;margin-top: 5px;"><img src="{% static 'assets/img/QNHrwL2q.jpg' %}" style="width: 100px;"></div>
                                         <div class="col text-center" style="margin: 5px;margin-right: 0px;"><img src="{% static 'assets/img/HackerRank_Icon-1000px.png' %}" style="width: 100px;"></div>
@@ -149,6 +260,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
 
 

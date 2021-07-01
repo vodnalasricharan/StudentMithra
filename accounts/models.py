@@ -66,10 +66,9 @@ class codinglinks(models.Model):
     )
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     platform=models.CharField(choices=PLT,max_length=200,default='leetcode')
-    image=models.ImageField(null=True, blank=True, validators=[validate_image],upload_to='codinglinks')
     link=models.URLField(max_length=500)
     def __str__(self):
-        return self.link
+        return self.platform
 
 class Internship(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)

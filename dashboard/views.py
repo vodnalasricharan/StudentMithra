@@ -29,7 +29,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
     account=Account.objects.get(user=request.user)
-
+    internships = Internship.objects.filter(user=request.user)
+    projects = Project.objects.filter(user=request.user)
     try:
         education=Education.objects.get(user= request.user)
     except Education.DoesNotExist:
@@ -62,6 +63,8 @@ def dashboard(request):
         'education':education,
         'achieve':achieve,
         'coding_objs':coding_objs,
+        'internships':internships,
+        'projects':projects,
     }
     return render(request,'dashboard.html',context=context)
 

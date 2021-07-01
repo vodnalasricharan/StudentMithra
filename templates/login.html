@@ -56,7 +56,7 @@
 					                        <p id="messages">{{message}}</p>
                                     </div>
                                     {% endfor %}
-                                    <div class="text-center" style="padding-top: 0px;color: rgb(18,35,46);margin-top: 24px;"><a class="small" href="forgot-password.html" style="padding-top: 0px;color: rgb(20,37,48);">Forgot Password?</a></div>
+                                    <div class="text-center"><a class="small" href="{% url 'reset_password' %}" style="border-color: rgb(78, 115, 223);border-top-color: rgb(78,;border-right-color: 115,;border-bottom-color: 223);border-left-color: 115,;color: rgb(18,35,46);">Forgot Password?</a></div>
                                     <div class="text-center" style="margin-top: 5px;"><a class="small" href="{% url 'register' %}" style="color: rgb(17,34,45);">New user? Create an Account!</a></div>
                                 </div>
                             </div>
