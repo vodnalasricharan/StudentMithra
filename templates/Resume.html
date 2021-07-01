@@ -186,7 +186,7 @@
 
                                 </div>
                                 {% else %}
-                            <div style="text-align: right;"><a href="{{ resume1.resume.url }}">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug1 %}">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                             {% endif  %}
                             </form>
                         </div>
@@ -217,7 +217,7 @@
 
                                 </div>
                                 {% else %}
-                            <div style="text-align: right;"><a href="{{ resume2.resume.url }}" target="_blank">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug2 %}" target="_blank">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                             {% endif  %}
                             </form>
                         </div>
@@ -248,7 +248,7 @@
 
                                 </div>
                                 {% else %}
-                            <div style="text-align: right;"><a href="{{ resume3.resume.url }}">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug3 %}">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                             {% endif  %}
                                 </form>
                         </div>

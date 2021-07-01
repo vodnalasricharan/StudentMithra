@@ -14,6 +14,13 @@ from .models import *
 from dashboard.views import *
 from .question_list import *
 from itertools import islice
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.files.images import ImageFile
+from django.core.files import File
+import pyqrcode
+import png
+from pyqrcode import QRCode
 
 
 def authenticated_user(view_func):
@@ -48,7 +55,11 @@ def accountregister(request):
             try:
                 for obj in questions_list:
                     questions.objects.create(user=user,ques=obj[0],ques_link=obj[1],video=obj[2],gfg=obj[3],status=False)
-                Account.objects.create(
+                url = pyqrcode.create('https://'+str(request.META['HTTP_HOST']+'/'+str(username)))
+                print(url)
+                url.png(settings.MEDIA_ROOT+'/'+str(username)+'.png',scale=8)
+                print('qr_code created')
+                obj_a=Account.objects.create(
                     user=user,
                     name=request.POST.get('username'),
                     email=request.POST.get('email'),
@@ -62,6 +73,11 @@ def accountregister(request):
                         random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
                         range(10)),
                 )
+                print('account created')
+                with open(settings.MEDIA_ROOT+'/'+str(username)+'.png', 'rb') as f:  # use 'rb' mode for python3
+                    data = File(f)
+                    obj_a.qr_code.save(str(username)+'.png', data, True)
+                obj_a.save()
 
                 messages.success(request, 'Account was created for ' + username)
 
@@ -101,6 +117,61 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
+
+def othersprofile(request,pk):
+    user=User.objects.get(username=pk)
+    account = Account.objects.get(user=user)
+    internships = Internship.objects.filter(user=user)
+    projects = Project.objects.filter(user=user)
+    try:
+        education = Education.objects.get(user=user)
+    except Education.DoesNotExist:
+        education = None
+
+    try:
+        achieve = Addon.objects.get(user=user)
+    except Addon.DoesNotExist:
+        achieve = None
+
+    try:
+        resume1 = Resume.objects.get(slug=account.slug1)
+    except ObjectDoesNotExist:
+        resume1 = None
+    try:
+        resume2 = Resume.objects.get(slug=account.slug2)
+    except ObjectDoesNotExist:
+        resume2 = None
+    try:
+        resume3 = Resume.objects.get(slug=account.slug3)
+    except ObjectDoesNotExist:
+        resume3 = None
+
+    coding_objs = codinglinks.objects.filter(user=user)
+    context = {
+        'resume1': resume1,
+        'resume2': resume2,
+        'resume3': resume3,
+        'account': account,
+        'education': education,
+        'achieve': achieve,
+        'coding_objs': coding_objs,
+        'internships': internships,
+        'projects': projects,
+        'others_view': True,
+    }
+    return render(request, 'dashboard.html', context=context)
+
+
+def get_resume(request,slug):
+    try:
+        resume=Resume.objects.get(slug=slug)
+        return redirect(resume.resume.url)
+    except Resume.DoesNotExist:
+        resume=None
+        context={
+            'resume':resume,
+        }
+        return render(request,'show_resume.html',context)
 
 """def login_view(request):
     # print(request.user.is_authenticated())

@@ -53,7 +53,7 @@ def dashboard(request):
         resume3=Resume.objects.get(slug=account.slug3)
     except ObjectDoesNotExist:
         resume3=None
-
+    print(account.qr_code.url)
     coding_objs=codinglinks.objects.filter(user=request.user)
     context={
         'resume1':resume1,
@@ -65,6 +65,7 @@ def dashboard(request):
         'coding_objs':coding_objs,
         'internships':internships,
         'projects':projects,
+        'others_view':False,
     }
     return render(request,'dashboard.html',context=context)
 
@@ -145,6 +146,7 @@ def myresume(request):
         'resume1':res1,
         'resume2':res2,
         'resume3':res3,
+        'account':acc,
     }
     return render(request,'Resume.html',context)
 
@@ -202,3 +204,12 @@ def profilesettings(request):
     }
     return render(request,'profile.html',context=context)
 
+
+#*************************************************************standard blogs**********************************************************************
+
+@login_required
+def dsaimportant(request):
+    return render(request,'dsaimport.html')
+@login_required
+def pathtoproduct(request):
+    return render(request,'pathtoproduct.html')

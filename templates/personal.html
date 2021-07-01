@@ -10,9 +10,13 @@ Personal Settings | {{ block.super }}
                     <div class="row mb-3">
                         <div class="col-lg-4" style="border-radius: 15px;">
                             <div class="card mb-3" style="border-radius: 15px;">
+                                {% if profile.profile_pic %}
                                 <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{ profile.profile_pic.url }}" width="160" height="160" style="padding-top: 0px;margin-left: 0px;">
 <!--                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Photo</button></div>-->
 <!--                                    {{ form.profile_pic }}-->
+                                    {% else %}
+                                    <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{% static 'assets/img/dogs/image2.jpeg' %}" width="160" height="160" style="padding-top: 0px;margin-left: 0px;">
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -25,7 +29,7 @@ Personal Settings | {{ block.super }}
                                             <p class="m-0 fw-bold" style="color: #ffffff;">Personal Information</p>
                                         </div>
                                         <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;">
-                                            <form method='POST' action=''>
+                                            <form method='POST' action='' enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 {{ form.media.css }}
                                                 {{  form.media.js }}

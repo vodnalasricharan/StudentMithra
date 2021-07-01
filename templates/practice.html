@@ -42,6 +42,17 @@ Practice | {{ block.super }}
 {% endblock style %}
 
 {% block part %}
+<div class="container">
+                    <div class="card" style="background: rgb(18,35,46);border-radius: 15px;margin: 0px;margin-top: 0px;">
+                        <div class="card-header" style="width: 921.6px;background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                        <p>Guide</p>
+                        </div>
+                        <div class="card-body" style="background: rgb(255,240,0);margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
+                            <li><a href="{% url 'dsaimport' %}">is DSA important to get job?</a></li>
+                            <li><a href="{% url 'pathtoproduct' %}">Path to Product based companies</a></li>
+                        </div>
+                    </div>
+</div>
 
                 <div class="container">
                     <div class="card" style="background: rgb(18,35,46);border-radius: 15px;margin: 0px;margin-top: 0px;">

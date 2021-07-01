@@ -18,12 +18,12 @@ def profilesettings(request):
         profile = Account(user=request.user)
 
     if request.method == 'POST':
-        form = AccountForm(request.POST, instance=profile)
+        form = AccountForm(request.POST,request.FILES,instance=profile)
         if form.is_valid():
             form.save()
             return redirect('dashboard')
     else:
-        form = AccountForm(instance=profile)
+        form = AccountForm(request.POST or None,request.FILES or None,instance=profile)
     context = {
         'title': 'Update',
         'form': form,
@@ -187,7 +187,7 @@ def achievements(request):
         form = AddonForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, "Successfully saved Education details")
+            messages.success(request, "Successfully saved Achievement details")
             return redirect('dashboard')
 
     else:
@@ -249,17 +249,17 @@ def update_coding(request,pk):
             inst = form.save(commit=False)
             inst.user = request.user
             if inst.platform == 'leetcode':
-                inst.image = static('/assets/img/7xInX10u_400x400.jpg')
+                inst.image = 'https://drive.google.com/file/d/11CleozRxg2utNLDoTFLd_92H53wjvxlL/view?usp=sharing'
             elif inst.platform == 'hackerrank':
-                inst.image = static('/assets/img/HackerRank_Icon-1000px.png')
+                inst.image = 'https://drive.google.com/file/d/1wu3Wh6iJ3maAoaTT0hCm5PprhMvusRSA/view?usp=sharing'
             elif inst.platform == 'codechef':
-                inst.image = static('/assets/img/codechef.png')
+                inst.image = 'https://drive.google.com/file/d/1_W8Q3zgGHqKqJJzlI-oY7mz4w8wypisq/view?usp=sharing'
             elif inst.platform == 'codeforces':
-                inst.image = static('/assets/img/codeforces.jpg')
+                inst.image = 'https://drive.google.com/file/d/1bEuT-de5ikzQeVBqKJxViadhz6Rfr2DQ/view?usp=sharing'
             elif inst.platform == 'gfg':
-                inst.image = static('/assets/img/QNHrwL2q.jpg')
+                inst.image = 'https://drive.google.com/file/d/18F4Nj_pUZ9aAhow5qScjUdwhYQ5_uJG7/view?usp=sharing'
             else:
-                inst.image = static('/assets/img/0f8b2870896edcde8f6149fe2733faaf.jpg')
+                inst.image = 'https://drive.google.com/file/d/1cb5OVf5XxRkyktRpsfnXfn_xtNclo5gq/view?usp=sharing'
 
             inst.save()
             messages.success(request, 'succesfully updated')

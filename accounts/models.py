@@ -36,13 +36,14 @@ class Account(models.Model):
     email = models.CharField(max_length=200, null=True, validators=[validate_email])
     date_created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
     gender = models.CharField(choices=GEN,max_length=10,blank=True,null=True)
-    profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],upload_to='profilepics')
+    profile_pic = models.ImageField(null=True, validators=[validate_image],upload_to='profilepics')
     mobile_no= PhoneNumberField(blank=True)
     slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
     slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
     slug3 = models.CharField(max_length=20, blank=True,unique=True,null=True)
     address=models.CharField(max_length=200,blank=True,null=True)
     linkedin_profile=models.URLField(max_length=500,blank=True,null=True)
+    qr_code=models.ImageField(null=True,validators=[validate_image],upload_to='qr_code')
 
     def __str__(self):
         return self.email
@@ -66,6 +67,7 @@ class codinglinks(models.Model):
     )
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     platform=models.CharField(choices=PLT,max_length=200,default='leetcode')
+    image=models.URLField(null=True,max_length=500)
     link=models.URLField(max_length=500)
     def __str__(self):
         return self.platform

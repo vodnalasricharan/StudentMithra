@@ -11,4 +11,6 @@ urlpatterns=[
     path('practice/<int:pk>/delete',mark_as_completed,name='markascomp'),
     path('practice/None',practice_none,name='practice_none'),
     path('practice/reset',practice_reset,name='practice_reset'),
+    path('practice/dsa',dsaimportant,name='dsaimport'),
+    path('practice/pathtoproduct',pathtoproduct,name='pathtoproduct'),
 ]
