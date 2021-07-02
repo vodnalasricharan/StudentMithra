@@ -18,6 +18,10 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.core.files import File
+from wsgiref.util import FileWrapper
+# import magic
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+import mimetypes
 import pyqrcode
 import png
 from pyqrcode import QRCode
@@ -172,6 +176,24 @@ def get_resume(request,slug):
             'resume':resume,
         }
         return render(request,'show_resume.html',context)
+
+
+def download_qr(request,pk):
+    acc=Account.objects.get(id=pk)
+    img = acc.qr_code
+    if os.path.exists(img.file.name):
+        with open(img.file.name,'rb') as fh:
+            response=HttpResponse(fh.read(),content_type="application/adminupload")
+            response['Content-Disposition'] ='inline;filename='+os.path.basename(img.file.name)
+            return  response
+    else: Http404
+    # wrapper = FileWrapper(open(img.file.name))  # img.file returns full path to the image
+    # content_type = mimetypes.guess_type(filename)[0]  # Use mimetypes to get file type
+    # response = HttpResponse(wrapper, content_type=content_type)
+    # response['Content-Length'] = os.path.getsize(img.file)
+    # response['Content-Disposition'] = "attachment; filename=%s" % img.name
+    # return response
+
 
 """def login_view(request):
     # print(request.user.is_authenticated())

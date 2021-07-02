@@ -53,7 +53,7 @@ def dashboard(request):
         resume3=Resume.objects.get(slug=account.slug3)
     except ObjectDoesNotExist:
         resume3=None
-    print(account.qr_code.url)
+    # print(account.qr_code.url)
     coding_objs=codinglinks.objects.filter(user=request.user)
     context={
         'resume1':resume1,
