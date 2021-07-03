@@ -13,7 +13,7 @@ Practice | {{ block.super }}
                                 <li class="nav-item" style="background: #12232e;border-top-left-radius: 15px;border-top-right-radius: 15px;"><a class="nav-link active" href="{% url 'practice_com' %}" style="background: rgb(255,244,76);border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(18,35,46);">Completed</a></li>
                             </ul>
                         </div>
-                        <div class="card-body" style="background: rgb(255,240,0);margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
+                        <div class="card-body" style="background: beige;margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -29,7 +29,7 @@ Practice | {{ block.super }}
                                         {% for obj in questions_com %}
                                         <tr style="color: rgb(18,35,46);border-color: #616263e1;">
 <!--                                            <td>1</td>-->
-                                            <td><a href="{{ obj.ques_link }}" target="_blank">{{ obj.ques }}</a></td>
+                                            <td><a href="{{ obj.ques_link }}" target="_blank" style="color:black;text-decoration:none">{{ obj.ques }}</a></td>
                                             <td style="text-align: center;width: 76px;" ><a href="{{ obj.video }}" target="_blank"><i class="fa fa-youtube-play" style="color: #ff0000;"></i></a></td>
                                             <td style="text-align: center;"><a href="{{ obj.gfg }}" target="_blank" ><i class="fas fa-lightbulb" style="color: #2bad2b;"></i></a></td>
 

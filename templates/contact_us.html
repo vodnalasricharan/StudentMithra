@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+
+ Contact Us | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+
+
+        <div style="margin:80px;color:black">
+                <h1>Contact</h1>
+                <h4>Contact us directly if you have any questions</h4>
+                <p>
+                    Please write your name, email address and a message below if you have any questions.
+                </p>
+                <form method="post">
+                {% csrf_token %}
+                    {{form|crispy}}
+                    <button type="submit">Submit</button>
+                </form>
+            {{form.errors}}
+            </div>
+{% endblock part %}

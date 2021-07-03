@@ -219,9 +219,35 @@
                                                 <div class="mb-3"><label class="form-label"style="color: rgb(18,35,46);font-size: 16px;"><strong>Name</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
                                                         {% if account.name is not None %}
-                                                            {{ account.name }}
+                                                            {{account.full_name}}
+                                                        {% endif %}
+
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
+                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>E-mail</strong><br></label>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {% if account.email is not None %}
+                                                            {{account.email}}
                                                         {% else %}
-                                                            -
+                                                            ----
+                                                        {% endif %}
+
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
+                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>Qualification</strong><br></label>
+                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
+                                                        {% if education.highest_degree is not None %}
+                                                            {{education.highest_degree}}
+                                                        {% else %}
+                                                            ----
                                                         {% endif %}
 
                                                     </h4>
@@ -235,34 +261,21 @@
                                                         {% if education.inst_name is not None %}
                                                             {{education.inst_name}}
                                                         {% else %}
-                                                            -
+                                                            ----
                                                         {% endif %}
                                                         </h4>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>Qualification</strong><br></label>
-                                                    <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {% if education.qualif is not None %}
-                                                            {{education.qualif}}
-                                                        {% else %}
-                                                            -
-                                                        {% endif %}
 
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>LinkedIn Profile</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
                                                         {% if account.linkedin_profile is not None %}
-                                                            {{account.linkedin_profile}}
+                                                        <a href="{{account.linkedin_profile}}" target="_blank" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='grey'" style="text-decoration:none;color:grey;;">{{account.linkedin_profile}}</a>
                                                         {% else %}
-                                                            -
+                                                            ----
                                                         {% endif %}
 
                                                     </h4>
@@ -271,12 +284,15 @@
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>GitHub&nbsp;Profile</strong><br></label>
+                                                <div class="mb-3">
+                                                    <label class="form-label" style="color: rgb(18,35,46);font-size: 16px;">
+                                                        <strong>GitHub&nbsp;Profile</strong><br>
+                                                    </label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {% if education.qualif is not None %}
-                                                            github
+                                                        {% if account.github is not null %}
+                                                        <a href="{{account.github}}" target="_blank" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='grey'" style="text-decoration:none;color:grey;">{{account.github}}</a>
                                                         {% else %}
-                                                            -
+                                                            ----
                                                         {% endif %}
                                                     </h4>
                                                 </div>
@@ -284,18 +300,18 @@
                                         </div>
                                         <div class="row">
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
-                                                <div class="mb-3"><label class="form-label"  style="color: rgb(18,35,46);font-size: 16px;"><strong>E-mail</strong><br></label>
+                                                <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>Branch</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {% if account.email is not None %}
-                                                            {{account.email}}
+                                                        {% if education.branch is None %}
+                                                            ----
                                                         {% else %}
-                                                            -
+                                                            {{education.branch}}
                                                         {% endif %}
-
                                                     </h4>
                                                 </div>
                                             </div>
                                         </div>
+
 <!--                                        <div class="row">-->
 <!--                                            <div class="col" style="height: 50.8px;margin-bottom: 6px;">-->
 <!--                                                <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>Skills</strong><br></label>-->
@@ -307,12 +323,11 @@
                                             <div class="col" style="height: 50.8px;margin-bottom: 6px;">
                                                 <div class="mb-3"><label class="form-label" style="color: rgb(18,35,46);font-size: 16px;"><strong>Contact</strong><br></label>
                                                     <h4 style="height: 26.8px;margin-top: -9px;font-size: 20px;">
-                                                        {% if account.mobile_no is not None %}
-                                                            {{account.mobile_no}}
+                                                        {% if account.mobile_number is not None %}
+                                                                {{account.mobile_number}}
                                                         {% else %}
-                                                            -
+                                                            ----
                                                         {% endif %}
-
                                                     </h4>
                                                 </div>
                                             </div>
@@ -339,7 +354,12 @@
                                                     <tr>
 
                                                         <td>
-                                                            <a href="{{project.link}}" target="_blank" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">{{project.title}}</a></td>
+                                                            {% if project.link is not none %}
+                                                                    <a href="{{project.link}}" target="_blank" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">{{project.title}}</a></td>
+                                                                {% else %}
+                                                            <a href="#" onclick="call_counter();" style="color:#000000;text-decoration:none;">{{project.title}}</a>
+                                                                {% endif %}
+                                                            </td>
                                                         <td style="color: #000;">{{project.description}}</td>
                                                     </tr>
                                                     {% endfor %}
@@ -434,5 +454,10 @@ window.onclick = function(event) {
      }
     }
 }
+
+	function call_counter()
+        {
+            alert("No link is specified");
+        }
 
 {% endblock script %}

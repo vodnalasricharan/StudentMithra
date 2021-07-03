@@ -12,14 +12,14 @@ Coding Links | {{ block.super }}
                             <div class="card border-dark shadow" style="margin-bottom: 16px;border-radius: 15px;">
                                 <div class="card-header border-light py-3" style="background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
                                     <p class="m-0 fw-bold" style="color: #ffffff;">Coding Profiles
-                                    <a class="btn btn-sm btn-primary" role="button" data-inline="true" href="{% url 'add_coding' %}">Add</a>
+                                    <a class="btn btn-sm btn-primary" role="button" data-inline="true" href="{% url 'add_coding' %}" style="position:absolute;top:11px;right:10px">Add</a>
                                     </p>
                                 </div>
                                 <div class="card-body" style="background: #eefbfb;color: rgb(18,35,46);margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
                                     {% for obj in c_links %}
                                     <b><p>{{ obj.platform }} :</p></b>
-                                    <a class="btn btn-sm btn-primary" role="button" data-inline="true" href="{% url 'update_coding' obj.id %}">Update</a>
                                     <a href="{{ obj.image.url }}">{{ obj.link }}</a>
+	                                <a class="btn btn-sm btn-primary" role="button" data-inline="true" href="{% url 'update_coding' obj.id %}">Update</a>
                                     <p>{{ obj.image.url }}</p>
                                     {% endfor %}
 

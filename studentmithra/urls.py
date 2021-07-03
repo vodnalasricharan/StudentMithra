@@ -55,6 +55,8 @@ urlpatterns = [
 
     path('reset_password_complete/',auth_views.PasswordResetCompleteView.as_view(template_name="password_reset_done.html"),name="password_reset_complete"),
 
+    path("contact", contact, name="contact"),
+    url(r'^changepassword/$', change_password , name='change_password')
 ]
 
 if settings.DEBUG:

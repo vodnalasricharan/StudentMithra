@@ -25,6 +25,9 @@ import mimetypes
 import pyqrcode
 import png
 from pyqrcode import QRCode
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.mail import send_mail, BadHeaderError
 
 
 def authenticated_user(view_func):
@@ -194,6 +197,45 @@ def download_qr(request,pk):
     # response['Content-Length'] = os.path.getsize(img.file)
     # response['Content-Disposition'] = "attachment; filename=%s" % img.name
     # return response
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # send email code goes here
+            sender_name = form.cleaned_data['name']
+            sender_email = form.cleaned_data['email']
+
+            message = "{0} has sent you a new message:\n\n{1} \n\nfrom {2}".format(sender_name,
+                                                                                   form.cleaned_data['message'],
+                                                                                   sender_email)
+            send_mail('Team KanyaRasi-Contact us', message, sender_email,
+                      ['kanyarasi.ene@gmail.com'])
+            print('email sent!!!!!')
+            messages.success(request, 'Your Query has been sent')
+            return redirect('dashboard')
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact_us.html', {'form': form})
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profilesettings')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
 
 
 """def login_view(request):

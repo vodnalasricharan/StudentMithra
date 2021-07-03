@@ -26,24 +26,28 @@ def validate_image(image):
        raise ValidationError("Max size of file is %s MB" % limit_mb)
 
 class Account(models.Model):
-    GEN= (
-        ('male', 'male'),
-        ('female', 'female'),
+    GEN = (
+        ('M', 'Male'),
+        ('F', 'Female'),
     )
-    user= models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200,null=True)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    # id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200, null=True)
+    full_name = models.CharField(max_length=200, null=True)
     # we set null=True just for any other exception errors..but this name field cannot be empty
     email = models.CharField(max_length=200, null=True, validators=[validate_email])
-    date_created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
-    gender = models.CharField(choices=GEN,max_length=10,blank=True,null=True)
-    profile_pic = models.ImageField(null=True, validators=[validate_image],upload_to='profilepics')
-    mobile_no= PhoneNumberField(blank=True)
-    slug1 = models.CharField(max_length=20,blank=True,unique=True,null=True)
-    slug2 = models.CharField(max_length=20, blank=True,unique=True,null=True)
-    slug3 = models.CharField(max_length=20, blank=True,unique=True,null=True)
-    address=models.CharField(max_length=200,blank=True,null=True)
-    linkedin_profile=models.URLField(max_length=500,blank=True,null=True)
-    qr_code=models.ImageField(null=True,validators=[validate_image],upload_to='qr_code')
+    date_created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    gender = models.CharField(choices=GEN, max_length=1, blank=True, null=True)
+    profile_pic = models.ImageField(null=True, default='default.png', validators=[validate_image],
+                                    upload_to='profilepics')
+    mobile_number = PhoneNumberField(blank=True, region="IN")
+    slug1 = models.CharField(max_length=20, blank=True, unique=True, null=True)
+    slug2 = models.CharField(max_length=20, blank=True, unique=True, null=True)
+    slug3 = models.CharField(max_length=20, blank=True, unique=True, null=True)
+    address = models.CharField(max_length=200, blank=True, null=True)
+    linkedin_profile = models.URLField(max_length=500, blank=True, null=True)
+    github = models.URLField(max_length=500, blank=True, null=True)
+    qr_code = models.ImageField(null=True, validators=[validate_image], upload_to='qr_code')
 
     def __str__(self):
         return self.email
@@ -95,18 +99,21 @@ class Addon(models.Model):
     Achievements=models.CharField(max_length=500,default='-')
 
 class Education(models.Model):
-    QUA=(
-        ('Bachelors','Bachelor'),
-        ('Masters','master'),
-        ('Diploma','diploma'),
-        ('Degree','degree'),
-        ('HighSchool','highschool'),
+    QUA = (
+        ('Bachelors', 'Bachelor'),
+        ('Masters', 'Master'),
+        ('Diploma', 'Diploma'),
+        ('B.Pharm', 'B.Pharm'),
+        ('Pharm.D', 'Pharm.D'),
+        ('Degree', 'Degree'),
+        ('HighSchool', 'Highschool'),
     )
-    user=models.OneToOneField(User,blank=True,null=True,on_delete=models.CASCADE)
-    inst_name=models.CharField(max_length=200)
-    yop=models.IntegerField(default=2000)
-    qualif=models.CharField(choices=QUA,max_length=200,default='highschool')
-    branch=models.CharField(max_length=200,blank=True,null=True)
+    user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
+    inst_name = models.CharField(max_length=200)
+    yop = models.IntegerField(default=2000)
+    highest_degree = models.CharField(choices=QUA, max_length=200, default='highschool')
+    branch = models.CharField(max_length=200, blank=True, null=True)
+    grade_points = models.FloatField(max_length=3, null=True, blank=True)
 
 
     def __str__(self):

@@ -8,9 +8,24 @@ from django.contrib.auth import (
     logout,
     )
 class CreateUserForm(UserCreationForm):
+	username = forms.CharField(error_messages={'required': 'Please specify your username'})
+	email = forms.CharField(error_messages={'required': 'Email is a required field'})
+	password1 = forms.CharField(error_messages={'required': 'Password is a required field'})
+	password2 = forms.CharField(error_messages={'required': 'Repeat Password is a required field'})
+
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
+
+	def clean_password2(self):
+		password1 = self.cleaned_data.get("password1")
+		password2 = self.cleaned_data.get("password2")
+		if password1 and password2 and password1 != password2:
+			raise forms.ValidationError(
+				self.error_messages['password_mismatch'],
+				code='password_mismatch',
+			)
+		return password2
 
 
 User = get_user_model()
@@ -51,3 +66,9 @@ class UserRegisterForm(forms.ModelForm):
 			'email2',
 			'password'
 		]
+
+
+class ContactForm(forms.Form):
+	name = forms.CharField(max_length=100)
+	email = forms.EmailField()
+	message = forms.CharField(widget=forms.Textarea(attrs={'rows': 8, 'cols': 25}))

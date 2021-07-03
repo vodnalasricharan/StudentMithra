@@ -50,14 +50,14 @@
                                             </div>
                                         </div><div class="form-group"><button class="btn btn-primary text-uppercase shadow btn-user w-100" type="submit" style="color: rgb(255, 255, 255);background: #11222d;box-shadow: 0px 0px 5px 0px #203647;transform: translate(0px);filter: blur(0px);">Login</button></div>
                                     </form>
-
+									
                                     {% for message in messages %}
                                     <div class="alert alert-primary" role="alert">
 					                        <p id="messages">{{message}}</p>
                                     </div>
                                     {% endfor %}
-                                    <div class="text-center"><a class="small" href="{% url 'reset_password' %}" style="border-color: rgb(78, 115, 223);border-top-color: rgb(78,;border-right-color: 115,;border-bottom-color: 223);border-left-color: 115,;color: rgb(18,35,46);">Forgot Password?</a></div>
-                                    <div class="text-center" style="margin-top: 5px;"><a class="small" href="{% url 'register' %}" style="color: rgb(17,34,45);">New user? Create an Account!</a></div>
+                                    <div class="text-center"><a class="small" href="{% url 'reset_password' %}" style="font-weight:bold;text-decoration:none;border-color: rgb(78, 115, 223);border-top-color: rgb(78,;border-right-color: 115,;border-bottom-color: 223);border-left-color: 115,;color: rgb(18,35,46);">Forgot Password?</a></div>
+                                    <div class="text-center" style="margin-top: 5px;"><a class="small" href="{% url 'register' %}" style="color:black;font-weight:bold;text-decoration:none;">New user? Create an Account!</a></div>
                                 </div>
                             </div>
                         </div>

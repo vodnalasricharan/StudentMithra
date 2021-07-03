@@ -48,14 +48,14 @@
                     <div class="card shadow" style="border-radius: 15px;margin-bottom: 15px;">
                         <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
                                 <div>
-                                     <a class="btn btn-sm btn-warning"  style="background-color : #4da8da; border-color :#007cc7 ; box-shadow: 2px 2px 10px 0px rgb(120,168,248);" href="{% url 'createnote' %}">Add Note</a>
+                                     <a class="btn btn-sm btn-primary"  " href="{% url 'createnote' %}">Add Note</a>
 
                                 </div>
 
 
 
                         </div>
-                        <div class="card-body" style="background: rgba(255,240,0,0.7);margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                        <div class="card-body" style="background: beige;margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -72,7 +72,7 @@
                                         <tr>
                                             <td>{{note.title}}</td>
                                             <td>{{note.data}} </td>
-                                            <td><a class="btn btn-sm btn-warning" style="background-color : #4e73df;" href="{% url 'updatenote' note.id %}">Update</a></td>
+                                            <td><a class="btn btn-sm btn-primary"  href="{% url 'updatenote' note.id %}">Update</a></td>
                                             <td><a class="btn btn-sm btn-danger" id="myBtn" >Delete</a></td>
                                             <div id="myModal" class="modal">
 
