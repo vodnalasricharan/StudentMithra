@@ -74,15 +74,7 @@
     padding: 2px 16px;
     background-color: #5cb85c;
 
-#alert1{
-display:block;
-}
-#alert2{
-display:block;
-}
-#alert3{
-display:block;
-}
+
 {% endblock style%}
 {% block head_extra %}
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -130,7 +122,7 @@ display:block;
                                             </a>
                                         </div>
 
-                                        <div style="text-align: right;"><button class="modal-button" href="#myModal1">Link</button></div>
+                                        <div class="col-2 offset-4 d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align: right;"><button class="modal-button" href="#myModal1">Link</button></div>
                                                                 <!-- The Modal -->
                                 <div id="myModal1" class="modal">
 
@@ -142,7 +134,7 @@ display:block;
                                       <p id="text1">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'showresume' account.slug1 %}</p>
                         <button onclick="copy('text1')">Copy</button>
 
-                        <p id="alert1">Text Copied!</p>
+                        <p id="alert1" style="display:none;">Text Copied!</p>
                                     </div>
 
                                   </div>
@@ -157,7 +149,7 @@ display:block;
                                             </a>
                                         </div>
 
-                                        <div style="text-align: right;"><button class="modal-button" href="#myModal2">Link</button></div>
+                                        <div class="col-2 offset-4 d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align: right;"><button class="modal-button" href="#myModal2">Link</button></div>
                                                                 <!-- The Modal -->
                                 <div id="myModal2" class="modal">
 
@@ -169,7 +161,7 @@ display:block;
                                       <p id="text2">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'showresume' account.slug2 %}</p>
                                         <button onclick="copy('text2')">Copy</button>
 
-                                        <p id="alert2">Text Copied!</p>
+                                        <p id="alert2" style="display:none;">Text Copied!</p>
                                     </div>
 
                                   </div>
@@ -184,7 +176,7 @@ display:block;
                                             </a>
                                         </div>
 
-                                       <div style="text-align: right;"><button class="modal-button" href="#myModal3">Link</button></div>
+                                       <div class="col-2 offset-4 d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align: right;"><button class="modal-button" href="#myModal3">Link</button></div>
                                                                 <!-- The Modal -->
                                 <div id="myModal3" class="modal">
 
@@ -196,7 +188,7 @@ display:block;
                                       <p id="text3">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'showresume' account.slug3 %}</p>
                                         <button onclick="copy('text3')">Copy</button>
 
-                                        <p id="alert3">Text Copied!</p>
+                                        <p id="alert3" style="display:none;">Text Copied!</p>
                                     </div>
 
                                   </div>

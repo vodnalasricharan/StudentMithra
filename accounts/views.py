@@ -59,7 +59,7 @@ def accountregister(request):
             try:
                 for obj in questions_list:
                     questions.objects.create(user=user,ques=obj[0],ques_link=obj[1],video=obj[2],gfg=obj[3],status=False)
-                url = pyqrcode.create('https://'+str(request.META['HTTP_HOST']+'/'+str(username)))
+                url = pyqrcode.create(str(request.scheme)+'://'+str(request.META['HTTP_HOST']+'/'+str(username)))
                 print(url)
                 url.png(settings.MEDIA_ROOT+'/'+str(username)+'.png',scale=8)
                 print('qr_code created')

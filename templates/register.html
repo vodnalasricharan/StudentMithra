@@ -24,6 +24,43 @@
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/untitled.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:40px;height:40px;
+    border-style:solid;
+    border-color:black;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+    </style>
+
 </head>
 
 <body class="bg-gradient-primary" style="background: #4da8da;margin-top: 0px;padding: 34px;">
@@ -48,8 +85,8 @@
                                     <small style="color:black;margin-top:5px;margin-left:7px">**password must not contain username</small>
                                 </div>
 
-                                <div class="form-group"><button class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(18,35,46);">Register Account</button></div>
-
+                                <div class="form-group"><button onclick="$('#cover-spin').show(0)" class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(18,35,46);">Register Account</button></div>
+                                <div id="cover-spin"></div>
 
                             </form>
                             {% for message in messages %}
