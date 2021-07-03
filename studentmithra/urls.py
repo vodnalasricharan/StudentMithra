@@ -43,7 +43,9 @@ urlpatterns = [
     path('profile_settings/',include('profile_settings.urls')),
     path('resume/<str:slug>/',get_resume,name='showresume'),
     path('user/<str:pk>', othersprofile, name='othersprofile'),
+
     path('download_qr/<int:pk>',download_qr,name='download_qr'),
+
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset.html"),name="reset_password"),
 
