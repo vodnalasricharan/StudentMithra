@@ -72,7 +72,14 @@
                                         {% for project in projects %}
                                         <tr>
                                             <td><b>{{project.title}}</b></td>
-                                            <td><a href="{{project.link}}" target="_blank">{{project.link}}</a></td>
+	                                        
+                                            <td>
+	                                            {% if project.link is not none %}
+	                                            <a href="{{project.link}}" target="_blank" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">{{project.link}}</a></td>
+	                                            {% else %}
+	                                            <a href="#" onclick="call_counter();" style="color:#000000;text-decoration:none;">No link specified</a>
+	                                            {% endif %}
+	                                        </td>
                                             <td><b>{{project.description}} </b></td>
                                             <td><a href="{% url 'update_project' project.id %}" ><img class="border rounded-circle" src="{% static 'assets/img/edit.png' %}" style="width: 20px;height: 20px;"></a></td>
 
@@ -107,4 +114,9 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+function call_counter()
+{
+	alert("No link is specified");
+}
+
 {% endblock script %}
