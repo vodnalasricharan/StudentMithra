@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+
+ {{ title }} | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+
+
+<div class="container-fluid" style="background: #4da8da;">
+
+                    <div class="row">
+
+                        <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
+                            <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">{{ title }}</p>
+                                </div>
+                                <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                    <div style="color:black;">
+                                        <form method='POST' action=''  >
+                                            {% csrf_token %}
+                                            {{ form|crispy }}
+                                            <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit" style ="margin-top : 10px">{{ title }}</button></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+</div>
+{% endblock part %}

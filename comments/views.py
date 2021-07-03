@@ -36,6 +36,7 @@ def comment_delete(request, id):
     }
     return render(request, "confirm_delete.html", context)
 
+
 def comment_thread(request, id):
     #obj = Comment.objects.get(id=id)
     try:
@@ -46,15 +47,15 @@ def comment_thread(request, id):
     if not obj.is_parent:
         obj = obj.parent
 
-    content_object = obj.content_object # Post that the comment is on
-    content_id = obj.content_object.id
+    # content_object = obj.content_object # Post that the comment is on
+    # content_id = obj.content_object.id
 
     initial_data = {
             "content_type": obj.content_type,
             "object_id": obj.object_id
     }
     form = CommentForm(request.POST or None, initial=initial_data)
-    if form.is_valid() and request.user.is_authenticated():
+    if form.is_valid() and request.user.is_authenticated:
         c_type = form.cleaned_data.get("content_type")
         content_type = ContentType.objects.get(model=c_type)
         obj_id = form.cleaned_data.get('object_id')
@@ -78,7 +79,7 @@ def comment_thread(request, id):
                             content = content_data,
                             parent = parent_obj,
                         )
-        return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+        return HttpResponseRedirect(new_comment.get_absolute_url())
 
 
     context = {

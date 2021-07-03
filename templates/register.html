@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Register - Brand</title>
+    <title>Register | StudentMithra</title>
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica&amp;display=swap">
@@ -24,10 +24,49 @@
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/untitled.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/img/bulb3.svg' %}" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:40px;height:40px;
+    border-style:solid;
+    border-color:black;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+    </style>
+
 </head>
 
 <body class="bg-gradient-primary" style="background: #4da8da;margin-top: 0px;padding: 34px;">
-    <div class="container">
+
+    <div class="container" style="padding-top:30px">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
                 <div class="row">
@@ -44,23 +83,31 @@
                                 <div class="row mb-3">
                                     <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password1"></div>
                                     <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password2"></div>
-                                </div><div class="form-group"><button class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(18,35,46);">Register Account</button></div>
+<!--                                    <small style="color:black;margin-top:5px;margin-left:7px">**password must not contain username</small>-->
+                                </div>
+                                <p style="color:#12232e">*Password must not contain characters from username</p>
 
+                                <div class="form-group"><button onclick="$('#cover-spin').show(0)" class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(18,35,46);">Register Account</button></div>
+                                <div id="cover-spin"></div>
 
                             </form>
-                            {% for message in messages %}
-                                    <div class="alert alert-primary" role="alert">
-					                        <p id="messages">{{message}}</p>
-                                    </div>
-                                    {% endfor %}
-                            <div class="text-center"><a class="small" href="forgot-password.html" style="border-color: rgb(78, 115, 223);border-top-color: rgb(78,;border-right-color: 115,;border-bottom-color: 223);border-left-color: 115,;color: rgb(18,35,46);">Forgot Password?</a></div>
-                            <div class="text-center"><a class="small" href="{% url 'login' %}" style="color: rgb(18,35,46);">Already have an account? Login!</a></div>
+                            {{form.errors}}
+<!--                            {% for message in messages %}-->
+<!--                                    <div class="alert alert-primary" role="alert">-->
+<!--					                        <p id="messages">{{message}}</p>-->
+<!--                                    </div>-->
+<!--                                    {% endfor %}-->
+                            <div class="text-center"><a class="small" href="{% url 'login' %}" style="color: black;text-decoration:none;font-weight:bold;">Already have an account? Login!</a></div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
+
+
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>
     <script src="{% static 'assets/js/markdownit-edit-1.js' %}"></script>
@@ -70,5 +117,7 @@
     <script src="{% static 'assets/js/Table-With-Search.js' %}"></script>
     <script src="{% static 'assets/js/theme.js' %}"></script>
 </body>
+
+
 
 </html>

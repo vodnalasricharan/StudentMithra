@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+{% load static%}
+{% block head_title %}
+ {{ title }} | {{ block.super }}
+{% endblock head_title %}
+{% block style %}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+{% endblock style %}
+
+{% block part %}
+
+
+<div class="container">
+    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Internships</h2>
+                    <div class="card shadow" style="border-radius: 15px;margin-bottom: 15px;">
+                        <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                <div>
+
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Internship Details
+                                    <a class="btn btn-sm btn-primary" role="button" style="position:absolute; top:11.5px; right:15px;" data-inline="true" href="{% url 'addintern' %}">Add</a>
+                                    </p>
+                                </div>
+
+
+
+                        </div>
+                        <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+                                            <th style="width: 300px;">Role</th>
+                                            <th>Organisation</th>
+                                            <th>Description</th>
+                                            <th style="width: 50px;">edit</th>
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for intern in internships %}
+                                        <tr>
+                                            <td><b>{{intern.role}}</b></td>
+                                            <td><b>{{intern.Organisation}} </b></td>
+                                            <td><b>{{intern.description}} </b></td>
+                                            <td><a href="{% url 'intern_update' intern.id %}" ><i class="fa fa-edit" style="font-size:20px;text-align:center;color:#12232e"></i></a></td>
+                                        </tr>
+                                        {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock part %}
+{% block script %}
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+{% endblock script %}

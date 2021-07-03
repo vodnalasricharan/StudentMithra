@@ -12,13 +12,42 @@ from django.contrib import messages
 from .models import *
 # Create your views here.
 from dashboard.views import *
+from .question_list import *
+from itertools import islice
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.files.images import ImageFile
+from django.core.files import File
+from wsgiref.util import FileWrapper
+# import magic
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+import mimetypes
+import pyqrcode
+import png
+from pyqrcode import QRCode
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.mail import send_mail, BadHeaderError
+
+
+def authenticated_user(view_func):
+	def wrapper_func(request, *args, **kwargs):
+		if request.user.is_authenticated:
+			return redirect('dashboard')
+		else:
+			return view_func(request, *args, **kwargs)
+
+	return wrapper_func
+
+
+@authenticated_user
 def homepage(request):
     account = Account.objects.all()
 
     context = {'accounts':account,}
-    return render(request,'dashboard.html',context)
+    return render(request,'homepage.html',context)
 
-
+@authenticated_user
 def accountregister(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -30,24 +59,50 @@ def accountregister(request):
             form.password2 = request.POST.get('password2')
             user = form.save()
             username = request.POST.get('username')
+            try:
+                for obj in questions_list:
+                    questions.objects.create(user=user,ques=obj[0],ques_link=obj[1],video=obj[2],gfg=obj[3],status=False)
+                url = pyqrcode.create(str(request.scheme)+'://'+str(request.META['HTTP_HOST']+'/user/'+str(username)))
+                print(url)
+                url.png(settings.MEDIA_ROOT+'/'+str(username)+'.png',scale=8)
+                print('qr_code created')
+                obj_a=Account.objects.create(
+                    user=user,
+                    name=request.POST.get('username'),
+                    email=request.POST.get('email'),
+                    slug1=''.join(
+                        random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
+                        range(10)),
+                    slug2=''.join(
+                        random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
+                        range(10)),
+                    slug3=''.join(
+                        random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in
+                        range(10)),
+                )
+                print('account created')
+                with open(settings.MEDIA_ROOT+'/'+str(username)+'.png', 'rb') as f:  # use 'rb' mode for python3
+                    data = File(f)
+                    obj_a.qr_code.save(str(username)+'.png', data, True)
+                obj_a.save()
+                os.remove(settings.MEDIA_ROOT+'/'+str(username)+'.png')
+                messages.success(request, 'Account was created for ' + username)
 
-            Account.objects.create(
-                user=user,
-                name= request.POST.get('username'),
-                email = request.POST.get('email'),
-                slug1=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-                slug2=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-                slug3=''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for x in range(10)),
-            )
+                return redirect('login')
+            except:
+                user.delete()
+                messages.info(request,'something went wrong')
 
-            messages.success(request, 'Account was created for ' + username)
+            else:
+                messages.info(request,'something went wrong')
+        else:
+            messages.info(request,'enter correct details/user already exists')
 
-            return redirect('login')
 
     context = {'form': form}
     return render(request, 'register.html', context)
 
-
+@authenticated_user
 def accountlogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -70,6 +125,121 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
+
+def othersprofile(request,pk):
+    user=User.objects.get(username=pk)
+    account = Account.objects.get(user=user)
+    internships = Internship.objects.filter(user=user)
+    projects = Project.objects.filter(user=user)
+    try:
+        education = Education.objects.get(user=user)
+    except Education.DoesNotExist:
+        education = None
+
+    try:
+        achieve = Addon.objects.get(user=user)
+    except Addon.DoesNotExist:
+        achieve = None
+
+    try:
+        resume1 = Resume.objects.get(slug=account.slug1)
+    except ObjectDoesNotExist:
+        resume1 = None
+    try:
+        resume2 = Resume.objects.get(slug=account.slug2)
+    except ObjectDoesNotExist:
+        resume2 = None
+    try:
+        resume3 = Resume.objects.get(slug=account.slug3)
+    except ObjectDoesNotExist:
+        resume3 = None
+
+    coding_objs = codinglinks.objects.filter(user=user)
+    context = {
+        'resume1': resume1,
+        'resume2': resume2,
+        'resume3': resume3,
+        'account': account,
+        'education': education,
+        'achieve': achieve,
+        'coding_objs': coding_objs,
+        'internships': internships,
+        'projects': projects,
+        'others_view': True,
+    }
+    return render(request, 'dashboard.html', context=context)
+
+
+def get_resume(request,slug):
+    try:
+        resume=Resume.objects.get(slug=slug)
+        return redirect(resume.resume.url)
+    except Resume.DoesNotExist:
+        resume=None
+        context={
+            'resume':resume,
+        }
+        return render(request,'show_resume.html',context)
+
+
+def download_qr(request,pk):
+    acc=Account.objects.get(id=pk)
+    img = acc.qr_code
+    if os.path.exists(img.file.name):
+        with open(img.file.name,'rb') as fh:
+            response=HttpResponse(fh.read(),content_type="application/adminupload")
+            response['Content-Disposition'] ='inline;filename='+os.path.basename(img.file.name)
+            return  response
+    else: Http404
+    # wrapper = FileWrapper(open(img.file.name))  # img.file returns full path to the image
+    # content_type = mimetypes.guess_type(filename)[0]  # Use mimetypes to get file type
+    # response = HttpResponse(wrapper, content_type=content_type)
+    # response['Content-Length'] = os.path.getsize(img.file)
+    # response['Content-Disposition'] = "attachment; filename=%s" % img.name
+    # return response
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # send email code goes here
+            sender_name = form.cleaned_data['name']
+            sender_email = form.cleaned_data['email']
+
+            message = "{0} has sent you a new message:\n\n{1} \n\nfrom {2}".format(sender_name,
+                                                                                   form.cleaned_data['message'],
+                                                                                   sender_email)
+            send_mail('Team KanyaRasi-Contact us', message, sender_email,
+                      ['kanyarasi.ene@gmail.com'])
+            print('email sent!!!!!')
+            messages.success(request, 'Your Query has been sent')
+            return redirect('dashboard')
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact_us.html', {'form': form})
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profilesettings')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
+
+
+def admin_edit(request):
+    return render(request,'admin.html')
 
 """def login_view(request):
     # print(request.user.is_authenticated())

@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head_title %}
+DSA | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+ <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card border-dark shadow mb-3" style="border-radius: 15px;">
+                                <div class="card-header py-3" style="background: #800080;border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Is DSA important to get a job?</p>
+                                </div>
+                                <div class="card-body" style="background: #ffffff;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;text-align: left;">
+                                    <p>You need to be perfect in 3 things......<br><br>1)Data Structures and Algorithms<br><br>2)DSA<br><br>3)DS &amp; Algo.</p>
+                                    <div class="row">
+                                        <div class="col" style="text-align: center;"><img src="{% static 'assets/img/Polish_20210701_105033512.png' %}" style="width: 300px;"></div>
+                                    </div>
+                                    <p>Yes.<br>They are all same.<br>You need to be perfect in DATA STRUCTURES and ALGORITHMS. This is very important and without this, You can't crack almost any product based company.<br>Usually product based companies like Amazon, FlipKart, Google, GoldmanSachs etc. will have more 3 rounds of filtering where your knowledge is tested mostly through DSA.<br>Company will test your problem solving skills through these rounds. Only after clearing these, You will get a chance of showcasing your projects, ideas, skills which are actually required for industry(like frameworks, front end, database etc.)<br>DSA can be said as the most important ingredient of preparation for big product based companies. Generally students prepare the theoretical things but are not aware of implementations. But in interviews, mostly they ask implementations and coding questions on DSA.<br>Think big re... Think big.</p>
+                                    <div class="row">
+                                        <div class="col" style="text-align: center;"><img src="{% static 'assets/img/tenor%20(5).gif' %}" style="text-align: center;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock part %}

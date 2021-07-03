@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block head_title %}
+Personal Settings | {{ block.super }}
+{% endblock head_title %}
+{% block part%}
+                <div class="container-fluid" style="background: #4da8da;">
+                    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Profile</h2>
+                    <div class="row mb-3">
+                        <div class="col-lg-4" style="border-radius: 15px;text-align:center">
+                            <div class="card mb-3" style="border-radius: 15px;">
+                                {% if profile.profile_pic %}
+                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{ profile.profile_pic.url }}" width="160" height="160" style="padding-top: 0px;margin-left: 0px;">
+<!--                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Photo</button></div>-->
+<!--                                    {{ form.profile_pic }}-->
+                                    {% else %}
+                                    <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{% static 'assets/img/dogs/image2.jpeg' %}" width="160" height="160" style="padding-top: 0px;margin-left: 0px;">
+                                    {% endif %}
+                                </div>
+	                               
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-8" >
+                            <div class="col" style="text-align:right; margin-right:10px;">
+                                 <a class="btn btn-warning btn-sm" href="{% url 'change_password' %}" style="color:black;text-decoration:none;margin-bottom:10px; ">Change Password</a>
+                            </div>
+                                <div class="row">
+                                <div class="col">
+                                    <div class="card border-dark shadow mb-3" style="border-radius: 15px;">
+                                        <div class="card-header py-3" style="background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                                            <p class="m-0 fw-bold" style="color: #ffffff;">Personal Information</p>
+                                        </div>
+                                        <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;color:#12232e">
+                                            <form method='POST' action='' enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {{ form.media.css }}
+                                                {{  form.media.js }}
+                                                {{ form|crispy }}
+                                                <div class="mb-3" style="margin-top: 5px;">
+                                                    <button class="btn btn-primary btn-sm" type="submit">{{title}}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+{% endblock part %}
+

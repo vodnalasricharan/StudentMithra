@@ -11,7 +11,7 @@ from .views import (
 	)
 
 urlpatterns = [
-	url(r'^$', post_list, name='list'),
+	url(r'^$', post_list, name='posts'),
     path('create/',post_create,name='create'),
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),
     url(r'^(?P<slug>[\w-]+)/edit/$', post_update, name='update'),

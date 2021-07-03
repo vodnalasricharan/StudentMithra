@@ -1,0 +1,132 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head_title %}
+Practice | {{ block.super }}
+{% endblock head_title %}
+{% block style %}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+{% endblock style %}
+
+{% block part %}
+<div class="container">
+                    <div class="card" style="background: rgb(18,35,46);border-radius: 15px;margin: 0px;margin-top: 0px;">
+                        <div class="card-header" style="color:#ffffff;font-weight:bold;background:rgb(18,35,46) ;border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                        Guide
+                        </div>
+                        <div class="card-body" style="background: beige;margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;">
+	                        <ol>
+	                            <li><a href="{% url 'dsaimport' %}" style="color:black;text-decoration:none">Is DSA important to get job?</a></li>
+	                            <li><a href="{% url 'pathtoproduct' %}" style="color:black;text-decoration:none">Path to Product Based Companies</a></li>
+                            </ol>
+                        </div>
+                    </div>
+</div>
+
+                <div class="container">
+                    <div class="card" style="background: rgb(18,35,46);border-radius: 15px;margin: 0px;margin-top: 10px; margin-bottom:20px;">
+                        <div class="card-header" style="background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                            <ul class="nav nav-tabs card-header-tabs" style="background: #12232e;margin-top: 0px;margin-right: -8px;">
+                                <li class="nav-item" style="background: #12232e;"><a class="nav-link active" href="{% url 'practice' %}" style="background: #f9ffe3;border-top-left-radius: 15px;border-top-right-radius: 15px;color: rgb(18,35,46);">To Do</a></li>
+                                <li class="nav-item" style="background: #12232e;border-top-left-radius: 15px;border-top-right-radius: 15px;"><a class="nav-link" href="{% url 'practice_com' %}" style="background: rgba(18,35,46,0.69);border-top-left-radius: 15px;border-top-right-radius: 15px;color: #ffffff;">Completed</a></li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-body" style="background: #f9ffe3;margin: 0px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin-right: -1px;  ">
+                            <div class="table-responsive">
+                                <button class="btn btn-sm btn-danger" style="margin-left:95%" id="myBtn"  >Reset</button>
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                  <div class="modal-content">
+                                    <span class="close" style="margin-left:90%;">&times;</span>
+                                    <p style="text-align:center;">Do you really want to Reset all questions?<br>This will Mark all questions as Not completed!</p>
+                                   <a class="btn btn-danger btn-sm" role="button"  data-inline="true" style="width:30%; margin-left:70%;" href="{% url 'practice_reset' %}">Reset</a>
+                                  </div>
+
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+<!--                                            <th style="width: 25px;">SI.No</th>-->
+                                            <th>Question</th>
+                                            <th style="width: 50px;">Youtube</th>
+                                            <th style="width: 76px;text-align: center;">GFG</th>
+                                            <th style="width: 50px;text-align: center;">Mark</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for obj in questions_incom %}
+                                        <tr style="color: rgb(18,35,46);border-color: #616263e1;">
+<!--                                            <td>1</td>-->
+                                            <td><a href="{{ obj.ques_link }}" target="_blank" style="color:black;text-decoration:none;">{{ obj.ques }}</a></td>
+                                            <td style="text-align: center;width: 76px;" ><a href="{{ obj.video }}" target="_blank"><i class="fa fa-youtube-play" style="color: #ff0000;"></i></a></td>
+                                            <td style="text-align: center;"><a href="{{ obj.gfg }}" target="_blank" ><i class="fas fa-lightbulb" style="color: #2bad2b;"></i></a></td>
+                                            <td style="text-align: center;"><a class="btn btn-primary" type="button" href="{% url 'markascomp' obj.id %}" style="font-size: 16px;width: 127.8px;padding: 0px 0px;padding-right: 0px;">Mark As Done</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock part %}
+
+{% block script %}
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+{% endblock script %}

@@ -18,13 +18,18 @@ from django.urls import path
 from django.conf.urls import url,include
 from accounts.views import *
 from dashboard.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
+from django.contrib.auth import views as  auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/',admin_edit,name='adminedit'),
+    path('savasa/', admin.site.urls),
 
     path('',homepage,name='home'),
     # path('profile/',profile_view,name='profile'),
-    path('dashboard/',dashboard,name='dashboard'),
+    path('dashboard/',include('dashboard.urls')),
     url(r'^api/users/', include(("accounts.api.urls",'userapi'),namespace='userapi')),
     path('login/',accountlogin,name='login'),
     path('logout/',logout_view,name='logout'),
@@ -35,4 +40,35 @@ urlpatterns = [
     url(r'^comments/', include(("comments.urls",'comments'), namespace='comments')),
     url(r'^api/notes/', include(("notes.api.urls",'posts-api'), namespace='notes-api')),
     # url(r'^notes/',include(("notes.urls",'notes'),namespace='notes')),
+    path('notes/',include('notes.urls')),
+    path('profile_settings/',include('profile_settings.urls')),
+    path('resume/<str:slug>/',get_resume,name='showresume'),
+    path('user/<str:pk>', othersprofile, name='othersprofile'),
+
+    path('download_qr/<int:pk>',download_qr,name='download_qr'),
+
+
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset.html"),name="reset_password"),
+
+    path('reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name="password_reset_sent.html"),name="password_reset_done"),
+
+    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_form.html"),name="password_reset_confirm"),
+
+    path('reset_password_complete/',auth_views.PasswordResetCompleteView.as_view(template_name="password_reset_done.html"),name="password_reset_complete"),
+
+    path("contact", contact, name="contact"),
+    url(r'^changepassword/$', change_password , name='change_password')
 ]
+
+
+urlpatterns += [
+
+  url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+
+  url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+
+]
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

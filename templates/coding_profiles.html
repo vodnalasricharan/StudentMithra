@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+Coding Links | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
+                <div class="container-fluid" style="background: #4da8da;">
+                    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Coding Profiles</h2>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="card border-dark shadow" style="margin-bottom: 16px;border-radius: 15px;">
+                                <div class="card-header border-light py-3" style="background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">Coding Profiles
+                                    <a class="btn btn-sm btn-primary" role="button" data-inline="true" href="{% url 'add_coding' %}" style="position:absolute;top:11px;right:10px">Add</a>
+                                    </p>
+                                </div>
+                                <div class="card-body" style="background: #eefbfb;color: rgb(18,35,46);margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                    {% for obj in c_links %}
+                                    <b><p>{{ obj.platform }} :</p></b>
+                                    <a href="{{ obj.image.url }}">{{ obj.link }}</a>
+	                                <a class="btn btn-sm btn-primary" style="margin-left:35px" role="button" data-inline="true" href="{% url 'update_coding' obj.id %} ">Update</a>
+                                    <p>{{ obj.image.url }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock part %}

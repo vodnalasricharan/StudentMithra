@@ -3,9 +3,47 @@
 {% load crispy_forms_tags %}
 
 
-<!--{% block head_title %}-->
-<!--{{ instance.title }} | {{ block.super }}-->
-<!--{% endblock head_title %}-->
+{% block head_title %}
+{{ title }} | {{ block.super }}
+{% endblock head_title %}
+
+{% block style %}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+{% endblock style %}
 
 
 <!-- {% block post_detail_link %}-->
@@ -14,12 +52,46 @@
 
 
 
-{% block part %}<div class="container">
+{% block part %}
+
+<div class="container-fluid" style="background: #4da8da;">
+
+                    <div class="row">
+
+                        <div class="col" style="border-radius: 0px;border-color: rgba(133,135,150,0);">
+                            <div class="card shadow mb-3" style="border-radius: 15px;border-color: rgba(133,135,150,0);">
+                                <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;height : 56px">
+
+                                    <p class="m-0 fw-bold" style="color: #ffffff;">{{title}}-{{instance.user}}
+                                        {% if request.user == instance.user %}
+                                        <a class="btn btn-primary btn-sm" role="button" style="position:absolute; top:10px; right:75px;"  data-inline="true"  href="{% url 'update' instance.slug %} ">Update</a>
+<!--                                        <a class="btn btn-danger btn-sm" role="button"  data-inline="true"  href="{% url 'delete' instance.slug %} ">Delete</a>-->
+                                        <button class="btn btn-danger btn-sm" id="myBtn" style="position:absolute; top:10px; right:10px;">Delete</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" style="margin-left:90%;">&times;</span>
+    <p style="text-align:center;">Do you really want to delete?</p>
+   <a class="btn btn-danger btn-sm" role="button"  data-inline="true" style="width:30%; margin-left:70%;" href="{% url 'delete' instance.slug %} ">Delete</a>
+  </div>
+
+</div>
+                                        {% endif %}
+                                    </p>
+
+
+                                </div>
+                                <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+                                    <div class="container">
 <div class='col-sm-6 col-sm-offset-3'>
     {% if instance.image %}
     <img src='{{ instance.image.url }}' class='img-responsive' />
     {% endif %}
-<h1>{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
+    <h1 style="color:#12232e;">{{ title }} </h1>
+    Created on:<small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small>
 
 <!-- {% if instance.read_time|time:"i" <= "01" %} < 1 minute {% else %}{{ instance.read_time|time:"i" }} minutes {% endif %} -->
 
@@ -56,21 +128,27 @@ Linkedin
 <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
 
 </p> -->
+
+
+
 <div class='row'>
 <div class='col-sm-12 '>
 
-   <div class='post-detail-item'>{{ instance.get_markdown }}</div>
+
+   <div class='post-detail-item' style="color:#203647">{{ instance.content|safe }}</div>
 
     <hr/>
     <br/>
 
     <div>
 
-        <p class='lead'>Comments</p>
+        <p class='lead' style="color:black;"><b>Comments</b></p>
         {% if request.user.is_authenticated %}
         <form method="POST" action="."> {% csrf_token %}
             {{ comment_form|crispy }}
-            <input type='submit' value='Post comment' class='btn btn-default'>
+
+
+            <input type='submit' value='Post comment' class='btn btn-primary btn-sm' style="margin-top:10px;">
         </form>
         {% else %}
         <p>You must login to comment </p>
@@ -79,25 +157,9 @@ Linkedin
         {% for comment in comments %}
 
         <blockquote>
-          <p>{{ comment.content }}</p>
-          <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class='comment-reply-btn' href='#'>Reply</a> | <a class='' href='{{ comment.get_absolute_url }}'>Thread</a></footer>
-          <div class='comment-reply'>
-              {% for child_comment in comment.children %}
-                <blockquote>
-                <p>{{ child_comment.content }}</p>
-                <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
-                </blockquote>
-             {% endfor %}
-             {% if request.user.is_authenticated %}
-            <form method="POST" action="."> {% csrf_token %}
-                {{ comment_form|crispy }}
-                <input type='hidden' name='parent_id' value='{{ comment.id }}'>
-                <input type='submit' value='Reply' class='btn btn-default'>
-            </form>
-            {% else %}
-        <p>You must login to comment </p>
-        {% endif %}
-        </div>
+          <p style="color:#12232e; margin-bottom:-2px">{{ comment.content }}</p>
+          <footer style="font-size:12px">via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %}</footer>
+
 
         </blockquote>
 
@@ -113,4 +175,35 @@ Linkedin
 </div>
 
 </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+</div>
+<!-- Trigger/Open The Modal -->
+
+
 {% endblock part %}
+{% block script %}
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+{% endblock script %}

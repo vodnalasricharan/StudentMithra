@@ -54,7 +54,7 @@ class Post(models.Model):
     width_field = models.IntegerField(default=0)
     content = RichTextField(blank=True,null=True)
     draft = models.BooleanField(default=False)
-    publish = models.DateField(auto_now=False, auto_now_add=False)
+    publish = models.DateField(auto_now=False, auto_now_add=True)
     read_time =  models.IntegerField(default=0) # models.TimeField(null=True, blank=True) #assume minutes
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -68,7 +68,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("posts:detail", kwargs={"slug": self.slug})
+        return reverse("detail", kwargs={"slug": self.slug})
 
     def get_api_url(self):
         return reverse("posts-api:detail", kwargs={"slug": self.slug})

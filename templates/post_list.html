@@ -1,60 +1,111 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "index.html" %}
+{% block head_title %}
+{{ title }} | {{ block.super }}
+{% endblock head_title %}
+{% block part %}
 
-
-<div class='col-sm-6 col-sm-offset-3'>
-    <h1>{{ title }}</h1>
-<form method='GET' action='' class='row'>
-        <div class='col-sm-6'>
-            <div class='input-group'>
-                <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
-                <span class='input-group-btn'>
-                    <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-                    <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
-                </span>
-            </div>
+<div class="container">
+    <div class="card shadow" style="border-radius: 15px;margin-bottom: 15px;">
+        <div class="card-header py-3" style="background: rgb(18,35,46);margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+            <h3 class="m-0 fw-bold" style="color: #ffffff;">Blog
+                {% if request.user.is_authenticated %}
+                <a class="btn btn-primary btn-sm" role="button" style="position:absolute; top:15px; right:20px" href="{% url 'create' %}">Create Post</a>
+                {% endif %}
+            </h3>
         </div>
-</form>
-{% for obj in object_list %}
-<div class="row">
-  <div class="col-sm-12">
-    <div class="thumbnail">
-        {% if obj.image %}
-         <img src='{{ obj.image.url }}' class='img-responsive' />
-        {% endif %}
-      <div class="caption post-detail-item">
-        {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
-        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
-        {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
-        {{ obj.get_markdown|truncatechars_html:120 }}
-        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
-      </div>
+        <div class="card-body" style="background: #e6e6fa;margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+
+            {% for obj in object_list %}
+            <div class="row" style="margin: 20px;margin-bottom: 40px;margin-right: 15px;border-radius: 15px;">
+
+<!--                <h1 style="color: #fff">{{ title }}</h1>-->
+<!--                <form method='GET' action='' class='row'>-->
+<!--                    <div class='col-sm-6'>-->
+<!--                        <div class='input-group'>-->
+<!--                            <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>-->
+<!--                            <span class='input-group-btn'>-->
+<!--                                &lt;!&ndash; <input class='btn btn-default' type='submit' value='Search' /> &ndash;&gt;-->
+<!--                                <button class='btn btn-sm btn-info' type='submit'>Search <i class="fa fa-search"></i></button>-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+                <div class="col" style="background: #ffffff;border-radius: 15px;">
+                    <div class="row">
+                        <div class="thumbnail">
+
+                            <div class="caption post-detail-item">
+
+
+    <!--******************************************************  POST TITLE SECTION  ******************************************************--->
+                                <h1 style="font-size: 30px;color: #ffffff;margin-top: 0px;background: #800080;border-top-left-radius: 15px;border-top-right-radius: 15px;margin-left: -12px;margin-right:-12px">
+                                    <a href="{{ obj.get_absolute_url }}" style="color: #ffffff;text-decoration:none;margin-left:15px; margin-top:5px;margin-bottom:5px">{{ obj.title }}</a>
+                                </h1>
+                                {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+
+
+    <!--******************************************************  POST DETAILS SECTION  ******************************************************--->
+                                <p style="margin-right: 0px;margin-left: 0px;text-align: left;color:#203647">
+                                    {{ obj.content|safe|striptags|truncatewords_html:50 }}
+
+                                </p>
+
+
+                                <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary btn-sm" role="button">View</a></p>
+                            </div>
+
+    <!--******************************************************  USERNAME AND DATE OF CREATION SECTION  ******************************************************--->
+
+                            <div class="col" >
+                                <div class="row" style="height: 35px;border-radius: 15px;margin-left: -13px;margin-right: -13px;">
+                                    <div class="col" style="height: 35px;background: #12232e;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-left-radius: 0px;border-bottom-left-radius: 15px;">
+                                        <p class="d-xxl-flex" style="margin-bottom: 5px;margin-top: 5px;color: rgb(255,255,255);">{{obj.user}}</p>
+                                    </div>
+                                    <div class="col" style="height: 35px;background: #12232e;border-top-left-radius: 0px;border-bottom-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 15px;margin-right: 1px;">
+                                        <p class="d-xxl-flex justify-content-xxl-end" style="text-align: right;margin-top: 5px;margin-bottom: 5px;color: rgb(255,255,255);">
+                                            {{obj.publish}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+
+        </div>
+
+        <!-- ************************************************************ PAGE 1 OF 1 SECTION  ************************************************************-->
+
+        <div class="pagination" >
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                    <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+
+                {% if object_list.has_next %}
+                    <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                {% endif %}
+            </span>
+        </div>
+
+
     </div>
-  </div>
-<hr/>
-</div>
-{% endfor %}
-
-
-<div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-        </span>
-
-        {% if object_list.has_next %}
-            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
-        {% endif %}
-    </span>
-</div>
-
-
 
 
 </div>
 
-{% endblock content %}
+
+    {% endblock part %}

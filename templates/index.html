@@ -1,12 +1,12 @@
 {%load static%}
 
-<!DOCTYPE html>
+
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Brand</title>
+    <title>{% block head_title %}Dashboard{% endblock head_title %}</title>
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica&amp;display=swap">
@@ -15,79 +15,125 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Add-Another-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Checkbox-Button-1.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Checkbox-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/checkbox.css' %}">
+    <link rel="stylesheet" href="{% static 'aassets/css/Collapsible-sidebar-left-or-right--Content-overlay.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Drag-Drop-File-Input-Upload.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/markdownit-edit-1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/markdownit-edit.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/NZButtonAddDelete-2.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/simple-footer.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Swiper-Slider-Card-For-Blog-Or-Product-1.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Swiper-Slider-Card-For-Blog-Or-Product.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search-1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Table-With-Search.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Toggle-Checkbox.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/untitled.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/img/bulb3.svg' %}" >
+
+    <style>
+{% block style %}{% endblock style %}
+</style>
+    {% block head_extra %} {% endblock head_extra %}
 </head>
 
 <body id="page-top">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #12232e;">
-    <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#" style="padding-right: 13px;">
-      <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-lightbulb" style="margin-left: 5px;color: #eff34a;"></i></div>
-      <div class="sidebar-brand-text mx-3"><span class="text-lowercase" style="padding-right: 0px;color: rgb(0,124,199);padding-left: 0px;margin-left: -6px;">STUDENT</span><span style="margin-left: 4px;font-size: 20px;">Mithra</span></div></a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="#" style="margin-top: 15px;margin-bottom: 15px;"><i class="fas fa-tachometer-alt" style="font-size: 15px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Profile Settings</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Table</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="margin-bottom: 15px;"><i class="far fa-user-circle"></i><span>Login</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="blank.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-bookmark-dash" style="margin-right: 2px;font-size: 15px;">
-                                <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
-                                <path fill-rule="evenodd" d="M5.5 6.5A.5.5 0 0 1 6 6h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"></path>
-                            </svg><span style="font-size: 15px;">Blog</span></a></li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/" style="padding-right: 13px;">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-lightbulb" style="margin-left: 5px;color: #eff34a;"></i></div>
+                    <div class="sidebar-brand-text mx-3">
+                        <span class="text-lowercase" style="padding-right: 0px;color: rgb(0,124,199);padding-left: 0px;margin-left: -6px;">STUDENT</span>
+                        <span style="margin-left: 4px;font-size: 20px;">Mithra</span>
+                    </div>
+                </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard' %}" style="margin-top: 15px;margin-bottom: 15px;"><i class="fas fa-tachometer-alt" style="font-size: 15px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'practice' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Practice</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'noteslist' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Notes</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'resumes' %}" style="margin-bottom: 15px;"><i class="fas fa-paperclip" style="font-size: 15px;"></i><span style="font-size: 15px;">Resumes</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'posts' %}" style="margin-bottom: 15px;"><i class="fa fa-bookmark-o" style="font-size: 20px;" ></i><span style="font-size: 15px;">Blog</span></a></li></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="margin-bottom: 15px;"><i class="fa fa-sign-out" style="font-size: 20px;"></i> <span style="font-size: 15px;">Logout</span></a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 20px;"></i><span style="font-size: 15px;">Login</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 20px;"></i><span style="font-size: 15px;">Register</span></a></li>
+                        {% endif %}
+                    </ul>
+                    <div class="text-center d-none d-md-inline">
+                        <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                    </div>
             </div>
         </nav>
          <div class="d-flex flex-column" id="content-wrapper">
             <div id="content" style="background: #4da8da;">
                 <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: linear-gradient(270deg, #12232e 24%, #007cc7 36%), #007cc7;border-color: rgb(133, 135, 150);border-top-color: rgb(133,;border-right-color: 135,;border-bottom-color: 150);border-left-color: 135,;">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button" style="color: rgb(255,255,255);"><i class="fas fa-bars"></i></button>
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." style="background: rgb(238,251,251);"><button class="btn btn-primary py-0" type="button" style="background: rgb(18,35,46);"><i class="fas fa-search"></i></button></div>
-                        </form>
+<!--                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">-->
+<!--                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." style="background: rgb(238,251,251);"><button class="btn btn-primary py-0" type="button" style="background: rgb(18,35,46);"><i class="fas fa-search"></i></button></div>-->
+<!--                        </form>-->
+                        {% if request.user.is_authenticated %}
+
                         <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="{% static 'assets/img/avatars/avatar1.jpeg' %}"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href='{% url 'logout' %}'><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                    </div>
-                                </div>
-                            </li>
+                            <li class="nav-item dropdown no-arrow"></li>
                         </ul>
+                        <div class="dropstart d-xxl-flex" style="width: 56px;height: 48px;text-align: center;color: rgba(133,135,150,0);"><a class="d-lg-flex justify-content-lg-center align-items-lg-center" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="width: 56px;height: 56px;text-align: center;color: rgba(78,115,223,0);margin-bottom: 0px;"><i class="icon ion-android-settings d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 32px;height: 32px;font-size: 32px;text-align: center;margin: 0px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;color: rgb(248,249,252);padding-bottom: 0px;"></i></a>
+                            <div class="dropdown-menu dropdown-menu-dark text-start" style="width: 213px;">
+                                <a class="dropdown-item" href="{% url 'profilesettings' %}">Personal Information</a>
+                                <a class="dropdown-item" href="{% url 'edu_settings' %}">Educational Info</a>
+                                <a class="dropdown-item" href="{%url 'internships' %}">Internships</a>
+                                <a class="dropdown-item" href="{% url 'projects' %}">Projects</a>
+                                <a class="dropdown-item" href="{% url 'coding_links' %}">Coding Profiles</a>
+                                <a class="dropdown-item" href="{% url 'achievements' %}">Achievemenets</a>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </nav>
+                {% include 'messages_display.html' %}
 
-        {% block part %}
+                {% block part %}
 
 
 
-		{% endblock part %}
-        </div>
+		        {% endblock part %}
+            </div>
             <footer class="sticky-footer" style="background: linear-gradient(270deg, #12232e 28%, #007cc7 40%), #203647;">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255);">Made with ❤ by KanyaRasi</span></div>
+                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255); font-size:15px">Made with ❤ by <a href="http://kanyarasi.me/" target="_blank" onMouseOver="this.style.color='#05ff05'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">Kanya Rasi </a>  |  <a href="{% url 'contact' %}" style="color:yellow;text-decoration:none;" >Contact us</a></span></div>
+
                 </div>
+
+
+
+
+
             </footer>
         </div>
-    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/bs-init.js' %}"></script>
-    <script src="{% static 'assets/js/markdownit-edit-1.js' %}"></script>
-    <script src="{% static 'assets/js/markdownit-edit-2.js' %}"></script>
-    <script src="{% static 'assets/js/markdownit-edit-3.js' %}"></script>
-    <script src="{% static 'assets/js/markdownit-edit.js' %}"></script>
-    <script src="{% static 'assets/js/Table-With-Search.js' %}"></script>
-    <script src="{% static 'assets/js/theme.js' %}"></script>
-
+    </div>
+        <a class="border rounded d-inline scroll-to-top"  href="#page-top" ><i class="fas fa-angle-up" style="margin-top:12px"></i></a>
+    <script>{% block script %} {% endblock script %}</script>
+        <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets/js/bs-init.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+        <script src="{% static 'assets/js/Collapsible-sidebar-left-or-right--Content-overlay.js' %}"></script>
+        <script src="{% static 'assets/js/markdownit-edit-1.js' %}"></script>
+        <script src="{% static 'assets/js/markdownit-edit-2.js' %}"></script>
+        <script src="{% static 'assets/js/markdownit-edit-3.js' %}"></script>
+        <script src="{% static 'assets/js/markdownit-edit.js' %}"></script>
+      <script src="{% static 'assets/js/responsive-blog-card-slider-1.js' %}"></script>
+    <script src="{% static 'assets/js/responsive-blog-card-slider.js' %}"></script>
+    <script src="{% static 'assets/js/Swiper-Slider-Card-For-Blog-Or-Product.js' %}"></script>
+        <script src="{% static 'assets/js/Table-With-Search.js' %}"></script>
+        <script src="{% static 'assets/js/theme.js' %}"></script>
+        <script src="{% static 'assets/js/Toggle-Checkbox.js' %}"></script>
+        <script src="{% static 'assets/js/copytoclipboard.js' %}"></script>
 
 </body>
 

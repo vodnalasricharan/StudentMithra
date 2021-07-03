@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block head_title %}
+Personal Settings | {{ block.super }}
+{% endblock head_title %}
+{% block part%}
+                <div class="container-fluid" style="background: #4da8da;">
+                    <h2 class="mb-4" style="color: #12232e;font-weight: bold;font-family: Nunito, sans-serif;">Profile Settings</h2>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card border-dark shadow mb-3" style="border-radius: 15px;">
+                                        <div class="card-header py-3" style="background: rgb(18,35,46);border-top-left-radius: 15px;border-top-right-radius: 15px;margin: -1px;">
+                                            <p class="m-0 fw-bold" style="color: #ffffff;">Achievements</p>
+                                        </div>
+                                        <div class="card-body" style="background: #eefbfb;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;margin: -1px;">
+                                            <form method='POST' action=''>
+                                                {% csrf_token %}
+                                                {{ form.media.css }}
+                                                {{  form.media.js }}
+                                                {{ form|crispy }}
+                                                <div class="mb-3" style="margin-top: 8px;">
+                                                    <button class="btn btn-primary btn-sm" type="submit">{{title}}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+{% endblock part %}
