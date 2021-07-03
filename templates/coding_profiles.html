@@ -19,7 +19,7 @@ Coding Links | {{ block.super }}
                                     {% for obj in c_links %}
                                     <b><p>{{ obj.platform }} :</p></b>
                                     <a href="{{ obj.image.url }}">{{ obj.link }}</a>
-	                                <a class="btn btn-sm btn-primary" role="button" data-inline="true" href="{% url 'update_coding' obj.id %}">Update</a>
+	                                <a class="btn btn-sm btn-primary" style="margin-left:35px" role="button" data-inline="true" href="{% url 'update_coding' obj.id %} ">Update</a>
                                     <p>{{ obj.image.url }}</p>
                                     {% endfor %}
 

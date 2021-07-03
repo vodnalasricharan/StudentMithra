@@ -170,7 +170,7 @@
                                 <input type="hidden" name="form_type" value="resume1">
                             <div class="files color form-group mb-3" style="margin-bottom: 16px;"><input type="file" multiple="" name="resume1" style="margin-top: 0px;height: 220px;"></div>
                             {% if resume1 == None %}
-                                 <div style="text-align: right;"><button class="modal-button" href="#myModal1">Link</button><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                                 <div style="text-align: right;"><button class="btn btn-primary" href="#myModal1">Previous</button><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                                                                 <!-- The Modal -->
                                 <div id="myModal1" class="modal">
 
@@ -179,14 +179,14 @@
 
                                     <div class="modal-body">
                                         <span class="close" style="margin-left:95%">×</span>
-                                      <p>Link doesn't exist</p>
+                                      <p>No previous Files</p>
                                     </div>
 
                                   </div>
 
                                 </div>
                                 {% else %}
-                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug1 %}">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug1 %}" >Previous</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                             {% endif  %}
                             </form>
                         </div>
@@ -201,7 +201,7 @@
                                 <input type="hidden" name="form_type" value="resume2">
                             <div class="files color form-group mb-3" style="margin-bottom: 16px;"><input type="file" multiple="" name="resume2" style="margin-top: 0px;height: 220px;"></div>
                                 {% if resume2 == None %}
-                                 <div style="text-align: right;"><button class="modal-button" href="#myModal2">Link</button><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                                 <div style="text-align: right;"><button class="modal-button" href="#myModal2">Previous</button><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                                                                 <!-- The Modal -->
                                 <div id="myModal2" class="modal">
 
@@ -210,14 +210,14 @@
 
                                     <div class="modal-body">
                                         <span class="close" style="margin-left:95%">×</span>
-                                      <p>Link doesn't exist</p>
+                                      <p>No previous Files</p>
                                     </div>
 
                                   </div>
 
                                 </div>
                                 {% else %}
-                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug2 %}" target="_blank">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug2 %}" target="_blank">Previous</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                             {% endif  %}
                             </form>
                         </div>
@@ -232,7 +232,7 @@
                                 <input type="hidden" name="form_type" value="resume3">
                             <div class="files color form-group mb-3" style="margin-bottom: 16px;"><input type="file" multiple="" name="resume3" style="margin-top: 0px;height: 220px;"></div>
                             {% if resume3 == None %}
-                                 <div style="text-align: right;"><button class="modal-button" href="#myModal3">Link</button><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                                 <div style="text-align: right;"><button class="modal-button" href="#myModal3">Previous</button><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                                                                 <!-- The Modal -->
                                 <div id="myModal3" class="modal">
 
@@ -241,14 +241,14 @@
 
                                     <div class="modal-body">
                                         <span class="close" style="margin-left:95%">×</span>
-                                      <p>Link doesn't exist</p>
+                                      <p>No previous Files</p>
                                     </div>
 
                                   </div>
 
                                 </div>
                                 {% else %}
-                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug3 %}">Link</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
+                            <div style="text-align: right;"><a href="{% url 'showresume' account.slug3 %}">Previous</a><button class="btn btn-primary" type="submit" style="background: rgb(241,245,74);color: rgb(18,35,46);height: 35px;padding-top: 5px;">Submit</button></div>
                             {% endif  %}
                                 </form>
                         </div>
@@ -258,7 +258,12 @@
 </div>
             <footer class="sticky-footer" style="background: linear-gradient(270deg, #12232e 28%, #007cc7 40%), #203647;">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255);">Made with ❤ by KanyaRasi</span></div>
+                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255); font-size:15px">Made with ❤ by <a href="http://kanyarasi.me/" target="_blank" onMouseOver="this.style.color='#05ff05'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">Kanya Rasi</a></span></div>
+
+
+                </div>
+                <div class="container my-auto" style="text-align:right;">
+
 	                <a href="{% url 'contact' %}" style="color:yellow;text-decoration:none" >Contact us</a>
 
                 </div>

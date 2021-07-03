@@ -13,7 +13,7 @@
                 {% endif %}
             </h3>
         </div>
-        <div class="card-body" style="background: #fcffa4;margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
+        <div class="card-body" style="background: #e6e6fa;margin: -1px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;">
 
             {% for obj in object_list %}
             <div class="row" style="margin: 20px;margin-bottom: 40px;margin-right: 15px;border-radius: 15px;">
@@ -39,8 +39,8 @@
 
 
     <!--******************************************************  POST TITLE SECTION  ******************************************************--->
-                                <h1 style="font-size: 35px;color: rgb(18,35,46);margin-top: 0px;background: linear-gradient(270deg, white 10%, #007cc7 98%);border-top-left-radius: 15px;border-bottom-left-radius: 0px;margin-left: -12px;">
-                                    <a href="{{ obj.get_absolute_url }}" style="color: rgb(18,35,46);text-decoration:none;margin-left:10px">{{ obj.title }}</a>
+                                <h1 style="font-size: 30px;color: #ffffff;margin-top: 0px;background: #800080;border-top-left-radius: 15px;border-top-right-radius: 15px;margin-left: -12px;margin-right:-12px">
+                                    <a href="{{ obj.get_absolute_url }}" style="color: #ffffff;text-decoration:none;margin-left:15px; margin-top:5px;margin-bottom:5px">{{ obj.title }}</a>
                                 </h1>
                                 {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
 

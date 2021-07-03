@@ -78,7 +78,7 @@
                                             <td><b>{{intern.role}}</b></td>
                                             <td><b>{{intern.Organisation}} </b></td>
                                             <td><b>{{intern.description}} </b></td>
-                                            <td><a href="{% url 'intern_update' intern.id %}" ><img class="border rounded-circle" src="{% static 'assets/img/edit.png' %}" style="width: 20px;height: 20px;"></a></td>
+                                            <td><a href="{% url 'intern_update' intern.id %}" ><i class="fa fa-edit" style="font-size:20px;text-align:center;color:#12232e"></i></a></td>
                                         </tr>
                                         {%endfor%}
                                     </tbody>

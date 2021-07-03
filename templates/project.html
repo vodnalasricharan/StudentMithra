@@ -81,7 +81,7 @@
 	                                            {% endif %}
 	                                        </td>
                                             <td><b>{{project.description}} </b></td>
-                                            <td><a href="{% url 'update_project' project.id %}" ><img class="border rounded-circle" src="{% static 'assets/img/edit.png' %}" style="width: 20px;height: 20px;"></a></td>
+                                            <td><a href="{% url 'update_project' project.id %}" ><i class="fa fa-edit" style="font-size:20px;text-align:center;color:#12232e"></i></a></td>
 
                                         </tr>
                                         {%endfor%}
