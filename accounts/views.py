@@ -87,6 +87,7 @@ def accountregister(request):
 
                 return redirect('login')
             except:
+                user.delete()
                 messages.info(request,'something went wrong')
 
             else:
