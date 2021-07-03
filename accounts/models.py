@@ -109,8 +109,8 @@ class Education(models.Model):
         ('HighSchool', 'Highschool'),
     )
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
-    inst_name = models.CharField(max_length=200)
-    yop = models.IntegerField(default=2000)
+    institute_name = models.CharField(max_length=200)
+    year_of_pass = models.IntegerField(default=2000)
     highest_degree = models.CharField(choices=QUA, max_length=200, default='highschool')
     branch = models.CharField(max_length=200, blank=True, null=True)
     grade_points = models.FloatField(max_length=3, null=True, blank=True)

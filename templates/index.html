@@ -1,6 +1,6 @@
 {%load static%}
 
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -58,19 +58,12 @@
                             <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard' %}" style="margin-top: 15px;margin-bottom: 15px;"><i class="fas fa-tachometer-alt" style="font-size: 15px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'practice' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Practice</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'noteslist' %}" style="margin-bottom: 15px;"><i class="fas fa-table" style="font-size: 15px;"></i><span style="font-size: 15px;">Notes</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'resumes' %}" style="margin-bottom: 15px;"><i class="fas fa-paperclip"></i><span>Resumes</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'posts' %}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-bookmark-dash" style="margin-right: 2px;font-size: 15px;">
-                                        <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
-                                        <path fill-rule="evenodd" d="M5.5 6.5A.5.5 0 0 1 6 6h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"></path>
-                                    </svg><span style="font-size: 15px;">Blog</span></a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="height: 15px;font-size: 15px;margin-right: 5px;">
-                                <path d="M8.51428 20H4.51428C3.40971 20 2.51428 19.1046 2.51428 18V6C2.51428 4.89543 3.40971 4 4.51428 4H8.51428V6H4.51428V18H8.51428V20Z" fill="currentColor"></path>
-                                <path d="M13.8418 17.385L15.262 15.9768L11.3428 12.0242L20.4857 12.0242C21.038 12.0242 21.4857 11.5765 21.4857 11.0242C21.4857 10.4719 21.038 10.0242 20.4857 10.0242L11.3236 10.0242L15.304 6.0774L13.8958 4.6572L7.5049 10.9941L13.8418 17.385Z" fill="currentColor"></path>
-                            </svg><span style="font-size: 15px;">Logout</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'resumes' %}" style="margin-bottom: 15px;"><i class="fas fa-paperclip" style="font-size: 15px;"></i><span style="font-size: 15px;">Resumes</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'posts' %}" style="margin-bottom: 15px;"><i class="fa fa-bookmark-o" style="font-size: 20px;" ></i><span style="font-size: 15px;">Blog</span></a></li></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="margin-bottom: 15px;"><i class="fa fa-sign-out" style="font-size: 20px;"></i> <span style="font-size: 15px;">Logout</span></a></li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Login</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 15px;"></i><span style="font-size: 15px;">Register</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 20px;"></i><span style="font-size: 15px;">Login</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="margin-bottom: 15px;"><i class="fas fa-user" style="font-size: 20px;"></i><span style="font-size: 15px;">Register</span></a></li>
                         {% endif %}
                     </ul>
                     <div class="text-center d-none d-md-inline">
@@ -113,18 +106,18 @@
             </div>
             <footer class="sticky-footer" style="background: linear-gradient(270deg, #12232e 28%, #007cc7 40%), #203647;">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255); font-size:15px">Made with ❤ by <a href="http://kanyarasi.me/" target="_blank" onMouseOver="this.style.color='#05ff05'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">Kanya Rasi</a></span></div>
+                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255); font-size:15px">Made with ❤ by <a href="http://kanyarasi.me/" target="_blank" onMouseOver="this.style.color='#05ff05'" onMouseOut="this.style.color='#000'" style="text-decoration:none;color:black;">Kanya Rasi </a>  |  <a href="{% url 'contact' %}" style="color:yellow;text-decoration:none;" >Contact us</a></span></div>
 
                 </div>
-                <div class="container my-auto" style="text-align:right;">
-	                <a href="{% url 'contact' %}" style="color:yellow;text-decoration:none;" >Contact us</a>
-                </div>
+
+
+
 
 
             </footer>
         </div>
     </div>
-        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up" ></i></a>
     <script>{% block script %} {% endblock script %}</script>
         <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'assets/js/bs-init.js' %}"></script>

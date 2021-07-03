@@ -62,7 +62,7 @@ def accountregister(request):
             try:
                 for obj in questions_list:
                     questions.objects.create(user=user,ques=obj[0],ques_link=obj[1],video=obj[2],gfg=obj[3],status=False)
-                url = pyqrcode.create(str(request.scheme)+'://'+str(request.META['HTTP_HOST']+'/'+str(username)))
+                url = pyqrcode.create(str(request.scheme)+'://'+str(request.META['HTTP_HOST']+'/user/'+str(username)))
                 print(url)
                 url.png(settings.MEDIA_ROOT+'/'+str(username)+'.png',scale=8)
                 print('qr_code created')
@@ -85,7 +85,7 @@ def accountregister(request):
                     data = File(f)
                     obj_a.qr_code.save(str(username)+'.png', data, True)
                 obj_a.save()
-
+                os.remove(settings.MEDIA_ROOT+'/'+str(username)+'.png')
                 messages.success(request, 'Account was created for ' + username)
 
                 return redirect('login')
@@ -237,6 +237,9 @@ def change_password(request):
         'form': form
     })
 
+
+def admin_edit(request):
+    return render(request,'admin.html')
 
 """def login_view(request):
     # print(request.user.is_authenticated())

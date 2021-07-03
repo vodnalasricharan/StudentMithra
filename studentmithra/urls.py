@@ -20,11 +20,12 @@ from accounts.views import *
 from dashboard.views import *
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.views.static import serve
 from django.contrib.auth import views as  auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/',admin_edit,name='adminedit'),
+    path('savasa/', admin.site.urls),
 
     path('',homepage,name='home'),
     # path('profile/',profile_view,name='profile'),
@@ -59,7 +60,15 @@ urlpatterns = [
     url(r'^changepassword/$', change_password , name='change_password')
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+
+  url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+
+  url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+
+]
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
