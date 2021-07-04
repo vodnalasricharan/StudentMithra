@@ -1,1 +1,1 @@
-worker: gunicorn studentmithra.wsgi --log-file -
+web: gunicorn studentmithra.wsgi --log-file -
