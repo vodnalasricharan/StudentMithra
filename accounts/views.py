@@ -96,7 +96,11 @@ def accountregister(request):
             else:
                 messages.info(request,'something went wrong')
         else:
-            messages.info(request,'enter correct details/user already exists')
+            # l=list()
+            # for key,value in form.errors:
+            #     l.append(value)
+            # print(form.errors)
+            messages.info(request,form.errors)
 
 
     context = {'form': form}
