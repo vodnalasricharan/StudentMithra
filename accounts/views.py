@@ -218,7 +218,7 @@ def contact(request):
                       ['kanyarasi.ene@gmail.com'])
             print('email sent!!!!!')
             messages.success(request, 'Your Query has been sent')
-            return redirect('dashboard')
+            return redirect('contact')
     else:
         form = ContactForm()
 
