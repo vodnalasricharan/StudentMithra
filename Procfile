@@ -1,0 +1,1 @@
+web: gunicorn studentmithra.wsgi --log-file -
