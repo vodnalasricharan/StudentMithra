@@ -19,6 +19,7 @@ django-rest-auth==0.9.5
 djangorestframework==3.12.4
 djangorestframework-jwt==1.11.0
 django-heroku
+dj-database-url
 gunicorn==20.1.0
 idna 
 markdown2==2.3.1
