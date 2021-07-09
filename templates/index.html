@@ -74,10 +74,12 @@
          <div class="d-flex flex-column" id="content-wrapper">
             <div id="content" style="background: #4da8da;">
                 <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top" style="background: linear-gradient(270deg, #12232e 24%, #007cc7 36%), #007cc7;border-color: rgb(133, 135, 150);border-top-color: rgb(133,;border-right-color: 135,;border-bottom-color: 150);border-left-color: 135,;">
+
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button" style="color: rgb(255,255,255);"><i class="fas fa-bars"></i></button>
 <!--                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">-->
 <!--                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." style="background: rgb(238,251,251);"><button class="btn btn-primary py-0" type="button" style="background: rgb(18,35,46);"><i class="fas fa-search"></i></button></div>-->
 <!--                        </form>-->
+                        <marquee behavior="scroll" direction="left" style="color:white;">This is a demo site,all the changes will disappear when website sleeps</marquee>
                         {% if request.user.is_authenticated %}
 
                         <ul class="navbar-nav flex-nowrap ms-auto">
