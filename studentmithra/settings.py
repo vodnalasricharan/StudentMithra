@@ -23,13 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3w*w-6cqdy=ow%*x*ll)w+ose=&)e6603=i49k=bn!-c!$lnzn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+#
+# ALLOWED_HOSTS = ['*']
+#
+DEBUG = False
 
-ALLOWED_HOSTS = []
-#
-# DEBUG = False
-#
-# ALLOWED_HOSTS=['*']
+ALLOWED_HOSTS=['*']
 
 # Application definition
 
@@ -141,7 +141,7 @@ if DEBUG:
         #'/var/www/static/',
     ]
 else:
-    STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+    STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
 #     #'/var/www/static/',
@@ -149,7 +149,7 @@ else:
 # STATIC_ROOT=os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -160,5 +160,5 @@ EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'kanyarasi.ene@gmail.com'
-EMAIL_HOST_PASSWORD = 'kanyarasi@mail1'
+# EMAIL_HOST_USER = 'mailid'
+# EMAIL_HOST_PASSWORD = 'password'
